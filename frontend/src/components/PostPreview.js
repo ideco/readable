@@ -2,13 +2,14 @@ import React from 'react';
 import {Card, Grid, Icon} from 'semantic-ui-react'
 
 const PostPreview = props => {
-    const {post} = props
+    const {post} = props;
     return (
         <Card fluid>
             <Card.Content>
                 <Card.Header><a>{post.title}</a></Card.Header>
-                <Card.Meta>Submitted by <em>{post.author}</em> to <a>{post.category}</a> on {post.timestamp}
-                    2017</Card.Meta>
+                <Card.Meta>Submitted
+                    by <em>{post.author}</em> to <a>{post.category}</a> on {new Date(post.timestamp).toLocaleString()}
+                </Card.Meta>
                 <Card.Description>{post.body}</Card.Description>
             </Card.Content>
             <Card.Content extra>
