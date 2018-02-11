@@ -9,6 +9,7 @@ class App extends Component {
     render() {
         return (
             <div>
+
                 <AppMenu/>
                 <PostList/>
                 <Footer/>
