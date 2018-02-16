@@ -11,7 +11,7 @@ class App extends Component {
         return (
             <div>
                 <AppMenu/>
-                <Route path="/" component={PostList}/>
+                <Route exact path="/" component={PostList}/>
                 <Route path="/:category" component={PostList}/>
                 <Footer/>
             </div>

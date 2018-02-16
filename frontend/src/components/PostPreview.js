@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card, Grid, Icon} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 const PostPreview = props => {
     const {post} = props;
@@ -8,7 +9,8 @@ const PostPreview = props => {
             <Card.Content>
                 <Card.Header><a>{post.title}</a></Card.Header>
                 <Card.Meta>Submitted
-                    by <em>{post.author}</em> to <a>{post.category}</a> on {new Date(post.timestamp).toLocaleString()}
+                    by <em>{post.author}</em> to <Link
+                        to={post.category}>{post.category}</Link> on {new Date(post.timestamp).toLocaleString()}
                 </Card.Meta>
                 <Card.Description>{post.body}</Card.Description>
             </Card.Content>
