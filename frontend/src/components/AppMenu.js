@@ -16,7 +16,7 @@ class AppMenu extends Component {
         return (
             <Menu fixed='top' inverted>
                 <Container>
-                    <Menu.Item as='a' header>
+                    <Menu.Item as={Link} to='/' header>
                         Readable
                     </Menu.Item>
                     <Menu.Item as='a'>Home</Menu.Item>

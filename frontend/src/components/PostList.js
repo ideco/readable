@@ -15,7 +15,7 @@ class PostList extends Component {
         if (pathName === '/') {
             return "Posts from All Categories"
         }
-        return `Posts from category "${pathName.substring(1)}"`
+        return `Posts from Category "${pathName.substring(1)}"`
     }
 
     render() {
