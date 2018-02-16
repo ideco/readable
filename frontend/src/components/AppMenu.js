@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 import {Container, Dropdown, Menu} from 'semantic-ui-react'
+import {loadCategories} from "../actions/categories";
+import {connect} from "react-redux";
 
 
 class AppMenu extends Component {
+
+    componentDidMount() {
+        this.props.loadCategories()
+    }
+
     render() {
+        const {categories} = this.props;
         return (
             <Menu fixed='top' inverted>
                 <Container>
@@ -13,8 +21,9 @@ class AppMenu extends Component {
                     <Menu.Item as='a'>Home</Menu.Item>
                     <Dropdown item simple text='Categories'>
                         <Dropdown.Menu>
-                            <Dropdown.Item>List Item</Dropdown.Item>
-                            <Dropdown.Item>List Item</Dropdown.Item>
+                            {categories.map(c =>
+                                <Dropdown.Item key={c.path}>{c.name}</Dropdown.Item>
+                            )}
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown item simple text='Sort by'>
@@ -29,6 +38,20 @@ class AppMenu extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        categories: state.categories
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadCategories: () => dispatch(loadCategories())
+    }
+};
+
+
 AppMenu.propTypes = {};
 
-export default AppMenu;
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppMenu);

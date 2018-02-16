@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001/'
+const BASE_URL = 'http://localhost:3001/';
 
 function baseFetch(relPath) {
     return fetch(BASE_URL + relPath,
@@ -10,4 +10,8 @@ function baseFetch(relPath) {
 
 export function fetchPosts() {
     return baseFetch('posts')
+}
+
+export function fetchCategories() {
+    return baseFetch('categories')
 }
