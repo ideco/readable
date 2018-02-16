@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Dropdown, Menu} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import {loadCategories} from "../actions/categories";
 import {connect} from "react-redux";
 
@@ -21,8 +22,13 @@ class AppMenu extends Component {
                     <Menu.Item as='a'>Home</Menu.Item>
                     <Dropdown item simple text='Categories'>
                         <Dropdown.Menu>
-                            {categories.map(c =>
-                                <Dropdown.Item key={c.path}>{c.name}</Dropdown.Item>
+                            <Dropdown.Item as={Link} to={'/'}>
+                                All
+                            </Dropdown.Item>
+                            {categories.map(category =>
+                                <Dropdown.Item key={category.path} as={Link} to={category.path}>
+                                    {category.name}
+                                </Dropdown.Item>
                             )}
                         </Dropdown.Menu>
                     </Dropdown>

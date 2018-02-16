@@ -11,11 +11,18 @@ class PostList extends Component {
         this.props.loadPosts()
     }
 
+    static createTitle(pathName) {
+        if (pathName === '/') {
+            return "Posts from All Categories"
+        }
+        return `Posts from category "${pathName.substring(1)}"`
+    }
+
     render() {
-        const {posts} = this.props
+        const {posts, location} = this.props;
         return (
             <Container text style={{marginTop: '7em'}}>
-                <Header as='h1'>Posts From All Categories</Header>
+                <Header as='h1'>{PostList.createTitle(location.pathname)}</Header>
                 <Card.Group>
                     {posts.map((post) =>
                         <PostPreview key={post.id} post={post}/>
@@ -29,15 +36,16 @@ class PostList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.posts
+        posts: state.posts,
+        location: state.routing.location
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         loadPosts: () => dispatch(loadPosts())
     }
-}
+};
 
 PostList.propTypes = {};
 
