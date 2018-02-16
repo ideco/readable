@@ -8,26 +8,25 @@ import PostPreview from "./PostPreview";
 class PostList extends Component {
 
     componentDidMount() {
-        this.props.loadPosts()
+        this.props.loadPosts(this.props.category)
     }
 
     static createTitle(pathName) {
-        if (pathName === '/') {
+        if (!pathName) {
             return "Posts from All Categories"
         }
-        return `Posts from Category "${pathName.substring(1)}"`
+        return `Posts from Category "${pathName}"`
     }
 
     render() {
-        const {posts, location} = this.props;
+        const {posts, category} = this.props;
         return (
             <Container text style={{marginTop: '7em'}}>
-                <Header as='h1'>{PostList.createTitle(location.pathname)}</Header>
+                <Header as='h1'>{PostList.createTitle(category)}</Header>
                 <Card.Group>
                     {posts.map((post) =>
                         <PostPreview key={post.id} post={post}/>
                     )}
-
                 </Card.Group>
             </Container>
         );
@@ -37,13 +36,13 @@ class PostList extends Component {
 const mapStateToProps = (state) => {
     return {
         posts: state.posts,
-        location: state.routing.location
+        category: state.routing.location.pathname.substring(1)
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: () => dispatch(loadPosts())
+        loadPosts: (category) => dispatch(loadPosts(category))
     }
 };
 

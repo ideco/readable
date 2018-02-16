@@ -8,8 +8,11 @@ function baseFetch(relPath) {
     ).then((res) => res.json())
 }
 
-export function fetchPosts() {
-    return baseFetch('posts')
+export function fetchPosts(category) {
+    if (!category) {
+        return baseFetch('posts')
+    }
+    return baseFetch(`${category}/posts`)
 }
 
 export function fetchCategories() {

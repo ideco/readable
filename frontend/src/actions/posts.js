@@ -1,13 +1,13 @@
 import {fetchPosts} from '../utils/serverApi'
 
-export const LOAD_POSTS = 'LOAD_POSTS'
-export const ADD_POST = 'ADD_POST'
-export const REMOVE_POST = 'REMOVE_POST'
-export const EDIT_POST = 'EDIT_POST'
+export const LOAD_POSTS = 'LOAD_POSTS';
+export const ADD_POST = 'ADD_POST';
+export const REMOVE_POST = 'REMOVE_POST';
+export const EDIT_POST = 'EDIT_POST';
 
-export function loadPosts() {
+export function loadPosts(category) {
     return (dispatch) => {
-        fetchPosts()
+        fetchPosts(category)
             .then((posts) => dispatch({
                 type: LOAD_POSTS,
                 posts
