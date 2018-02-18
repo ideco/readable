@@ -7,7 +7,7 @@ const PostPreview = props => {
     return (
         <Card fluid>
             <Card.Content>
-                <Card.Header><a>{post.title}</a></Card.Header>
+                <Card.Header as={Link} to={`${post.category}/${post.id}`}><a>{post.title}</a></Card.Header>
                 <Card.Meta>Submitted
                     by <em>{post.author}</em> to <Link
                         to={post.category}>{post.category}</Link> on {new Date(post.timestamp).toLocaleString()}
