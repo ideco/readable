@@ -12,7 +12,7 @@ class AppMenu extends Component {
     }
 
     render() {
-        const {categories} = this.props;
+        const {categories, selectedCategory} = this.props;
         return (
             <Menu fixed='top' inverted>
                 <Container>
@@ -22,11 +22,12 @@ class AppMenu extends Component {
                     <Menu.Item as='a'>Home</Menu.Item>
                     <Dropdown item simple text='Categories'>
                         <Dropdown.Menu>
-                            <Dropdown.Item as={Link} to={'/'}>
+                            <Dropdown.Item active={selectedCategory == null} as={Link} to={'/'}>
                                 All
                             </Dropdown.Item>
                             {categories.map(category =>
-                                <Dropdown.Item key={category.path} as={Link} to={category.path}>
+                                <Dropdown.Item key={category.path} active={category.path === selectedCategory} as={Link}
+                                               to={category.path}>
                                     {category.name}
                                 </Dropdown.Item>
                             )}
@@ -46,7 +47,8 @@ class AppMenu extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        categories: state.categories
+        categories: state.categories,
+        selectedCategory: state.selectedCategory
     }
 };
 
