@@ -1,9 +1,17 @@
 import {LOAD_POSTS} from '../actions/posts'
 
-export function posts(state = [], action) {
+const defaultState = {
+    allPosts: [],
+    selectedPost: null
+};
+
+export function posts(state = defaultState, action) {
     switch (action.type) {
         case LOAD_POSTS:
-            return action.posts;
+            return {
+                allPosts: action.posts,
+                selectedPost: null
+            };
         default:
             return state;
     }

@@ -42,7 +42,7 @@ class PostList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.posts,
+        posts: state.posts.allPosts,
         category: state.routing.location.pathname.substring(1)
     }
 };
