@@ -19,7 +19,6 @@ class AppMenu extends Component {
                     <Menu.Item as={Link} to='/' header>
                         Readable
                     </Menu.Item>
-                    <Menu.Item as='a'>Home</Menu.Item>
                     <Dropdown item simple text='Categories'>
                         <Dropdown.Menu>
                             <Dropdown.Item active={selectedCategory == null} as={Link} to={'/'}>
