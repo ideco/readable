@@ -10,7 +10,8 @@ export function loadPosts(category) {
         fetchPosts(category)
             .then((posts) => dispatch({
                 type: LOAD_POSTS,
-                posts
+                posts,
+                category
             }))
     }
 }

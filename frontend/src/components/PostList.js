@@ -8,7 +8,14 @@ import PostPreview from "./PostPreview";
 class PostList extends Component {
 
     componentDidMount() {
-        this.props.loadPosts(this.props.category)
+        this.props.loadPosts(this.props.match.params.category)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let nextCategory = nextProps.match.params.category;
+        if (nextCategory && this.props.category !== nextCategory) {
+            nextProps.loadPosts(nextCategory)
+        }
     }
 
     static createTitle(pathName) {
