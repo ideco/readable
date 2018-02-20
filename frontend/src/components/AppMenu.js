@@ -26,7 +26,7 @@ class AppMenu extends Component {
                             </Dropdown.Item>
                             {categories.map(category =>
                                 <Dropdown.Item key={category.path} active={category.path === selectedCategory} as={Link}
-                                               to={category.path}>
+                                               to={`/${category.path}`}>
                                     {category.name}
                                 </Dropdown.Item>
                             )}
