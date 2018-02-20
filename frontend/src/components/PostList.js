@@ -12,16 +12,16 @@ class PostList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.id !== nextProps.id) {
+        if (this.props.category !== nextProps.category) {
             nextProps.loadPosts(nextProps.match.params.category)
         }
     }
 
-    static createTitle(pathName) {
-        if (!pathName) {
+    static createTitle(category) {
+        if (!category) {
             return "Posts from All Categories"
         }
-        return `Posts from Category "${pathName}"`
+        return `Posts from Category "${category}"`
     }
 
     render() {
@@ -39,10 +39,10 @@ class PostList extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         posts: state.posts.allPosts,
-        category: state.selectedCategory
+        category: ownProps.match.params.category,
     }
 };
 
