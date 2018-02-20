@@ -4,38 +4,49 @@ import {loadSinglePost} from "../actions/posts";
 import {connect} from 'react-redux';
 import PostPreview from "./PostPreview";
 import Comments from "./Comments";
+import {loadComments} from "../actions/comments";
 
 class PostDetail extends Component {
 
     componentDidMount() {
-        this.props.loadSinglePost(this.props.match.params.postId)
+        this.props.loadSinglePost(this.props.match.params.postId);
+        this.props.loadComments(this.props.match.params.postId)
     }
 
     render() {
-        const {isLoading, post} = this.props;
+        const {isPostLoading, post, areCommentsLoading, comments} = this.props;
         return (
             <Container text>
-                {isLoading ? (
+                {isPostLoading ? (
                     <Icon name='spinner' loading={true}/>
                 ) : (
                     <PostPreview post={post}/>
                 )}
-                <Comments/>
+                {areCommentsLoading ? (
+                    <Icon name='spinner' loading={true}/>
+                ) : (
+                    <Comments comments={comments}/>
+                )}
+
             </Container>
         );
     }
 }
 
 const mapStateToProps = (state) => {
+
     return {
-        isLoading: state.selectedPost.isLoading,
-        post: state.selectedPost.post
+        isPostLoading: state.selectedPost.isLoading,
+        post: state.selectedPost.post,
+        areCommentsLoading: state.comments.isLoading,
+        comments: state.comments.comments
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadSinglePost: (postId) => dispatch(loadSinglePost(postId))
+        loadSinglePost: (postId) => dispatch(loadSinglePost(postId)),
+        loadComments: (postId) => dispatch(loadComments(postId))
     }
 };
 

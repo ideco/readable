@@ -4,12 +4,11 @@ import PostComment from "./PostComment";
 
 class Comments extends Component {
     render() {
+        const {comments} = this.props;
         return (
             <Comment.Group threaded>
                 <Header as='h3' dividing>Comments</Header>
-                <PostComment/>
-                <PostComment/>
-                <PostComment/>
+                {comments.map((comment) => <PostComment key={comment.id} comment={comment}/>)}
                 <Form reply>
                     <Form.TextArea/>
                     <Button content='Add Reply' labelPosition='left' icon='edit' primary/>
@@ -17,7 +16,6 @@ class Comments extends Component {
             </Comment.Group>
         )
     }
-
 }
 
 export default Comments

@@ -22,3 +22,7 @@ export function fetchPostDetails(id) {
 export function fetchCategories() {
     return baseFetch('categories')
 }
+
+export function fetchComments(postId) {
+    return baseFetch(`posts/${postId}/comments`)
+}

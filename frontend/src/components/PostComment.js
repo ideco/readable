@@ -2,14 +2,15 @@ import React from 'react'
 import {Comment, Grid, Icon} from 'semantic-ui-react'
 
 const PostComment = props => {
+    const {comment} = props;
     return (
         <Comment>
             <Comment.Content>
-                <Comment.Author as='a'>Matt</Comment.Author>
+                <Comment.Author as='a'>{comment.author}</Comment.Author>
                 <Comment.Metadata>
-                    <span>Today at 5:42PM</span>
+                    <span>{new Date(comment.timestamp).toLocaleString()}</span>
                 </Comment.Metadata>
-                <Comment.Text>How artistic!</Comment.Text>
+                <Comment.Text>{comment.body}</Comment.Text>
                 <Comment.Actions>
                     <Grid columns='equal'>
                         <Grid.Row>
@@ -20,7 +21,7 @@ const PostComment = props => {
                                 <Comment.Action>
                                     <Icon link color='red' name='chevron circle down'/>
                                 </Comment.Action>
-                                Score: 5
+                                Score: {comment.voteScore}
                             </Grid.Column>
                             <Grid.Column textAlign='right'>
                                 <Comment.Action>
