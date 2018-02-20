@@ -44,10 +44,10 @@ class AppMenu extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         categories: state.categories,
-        selectedCategory: state.selectedCategory
+        selectedCategory: ownProps.match.params.category
     }
 };
 
