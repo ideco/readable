@@ -12,8 +12,6 @@ class PostDetail extends Component {
 
     render() {
         const {isLoading, post} = this.props;
-
-        console.log(isLoading + " " + post);
         return (
             <Container text style={{marginTop: '7em'}}>
                 {isLoading ? (
@@ -28,7 +26,6 @@ class PostDetail extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.posts.post);
     return {
         isLoading: state.selectedPost.isLoading,
         post: state.selectedPost.post
