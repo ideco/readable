@@ -19,8 +19,8 @@ const PostComment = props => {
                                 </Comment.Action>
                                 <Comment.Action>
                                     <Icon link color='red' name='chevron circle down'/>
-                                    Score: 5
                                 </Comment.Action>
+                                Score: 5
                             </Grid.Column>
                             <Grid.Column textAlign='right'>
                                 <Comment.Action>
