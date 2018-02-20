@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Dropdown, Menu} from 'semantic-ui-react'
+import {Dropdown, Menu} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {loadCategories} from "../actions/categories";
 import {connect} from "react-redux";
@@ -14,31 +14,32 @@ class AppMenu extends Component {
     render() {
         const {categories, selectedCategory} = this.props;
         return (
-            <Menu fixed='top' inverted>
-                <Container>
-                    <Menu.Item as={Link} to='/' header>
-                        Readable
+            <Menu pointing secondary>
+
+                <Menu.Item as={Link} to='/' header>
+                    Readable
+                </Menu.Item>
+
+
+                <Menu.Item active={selectedCategory == null} as={Link} to={'/'}>
+                    all
+                </Menu.Item>
+                {categories.map(category =>
+                    <Menu.Item key={category.path} active={category.path === selectedCategory} as={Link}
+                               to={`/${category.path}`}>
+                        {category.name}
                     </Menu.Item>
-                    <Dropdown item simple text='Categories'>
-                        <Dropdown.Menu>
-                            <Dropdown.Item active={selectedCategory == null} as={Link} to={'/'}>
-                                All
-                            </Dropdown.Item>
-                            {categories.map(category =>
-                                <Dropdown.Item key={category.path} active={category.path === selectedCategory} as={Link}
-                                               to={`/${category.path}`}>
-                                    {category.name}
-                                </Dropdown.Item>
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                )}
+
+                <Menu.Menu position='right'>
                     <Dropdown item simple text='Sort by'>
                         <Dropdown.Menu>
                             <Dropdown.Item>Date</Dropdown.Item>
                             <Dropdown.Item>Score</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                </Container>
+                </Menu.Menu>
+
             </Menu>
         );
     }

@@ -27,7 +27,7 @@ class PostList extends Component {
     render() {
         const {posts, category} = this.props;
         return (
-            <Container text style={{marginTop: '7em'}}>
+            <Container text style={{marginTop: '3em'}}>
                 <Header as='h1'>{PostList.createTitle(category)}</Header>
                 <Card.Group>
                     {posts.map((post) =>
