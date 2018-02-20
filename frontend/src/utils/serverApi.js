@@ -15,6 +15,10 @@ export function fetchPosts(category) {
     return baseFetch(`${category}/posts`)
 }
 
+export function fetchPostDetails(id) {
+    return baseFetch(`posts/${id}`)
+}
+
 export function fetchCategories() {
     return baseFetch('categories')
 }

@@ -12,9 +12,8 @@ class PostList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let nextCategory = nextProps.match.params.category;
-        if (nextCategory && this.props.category !== nextCategory) {
-            nextProps.loadPosts(nextCategory)
+        if (this.props.id !== nextProps.id) {
+            nextProps.loadPosts(nextProps.match.params.category)
         }
     }
 
@@ -43,7 +42,7 @@ class PostList extends Component {
 const mapStateToProps = (state) => {
     return {
         posts: state.posts.allPosts,
-        category: state.routing.location.pathname.substring(1)
+        category: state.selectedCategory
     }
 };
 

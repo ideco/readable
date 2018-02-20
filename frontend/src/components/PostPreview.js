@@ -8,9 +8,9 @@ const PostPreview = props => {
         <Card fluid>
             <Card.Content>
                 <Card.Header as={Link} to={`/${post.category}/${post.id}`}>{post.title}</Card.Header>
-                <Card.Meta>Submitted
-                    by <em>{post.author}</em> to <Link
-                        to={post.category}>{post.category}</Link> on {new Date(post.timestamp).toLocaleString()}
+                <Card.Meta>Submitted by <em>{post.author}</em> to
+                    <Link to={`/${post.category}`}> {post.category} </Link>
+                    on {new Date(post.timestamp).toLocaleString()}
                 </Card.Meta>
                 <Card.Description>{post.body}</Card.Description>
             </Card.Content>
