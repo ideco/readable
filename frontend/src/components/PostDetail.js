@@ -3,6 +3,7 @@ import {Container, Icon} from "semantic-ui-react";
 import {loadSinglePost} from "../actions/posts";
 import {connect} from 'react-redux';
 import PostPreview from "./PostPreview";
+import Comments from "./Comments";
 
 class PostDetail extends Component {
 
@@ -13,13 +14,13 @@ class PostDetail extends Component {
     render() {
         const {isLoading, post} = this.props;
         return (
-            <Container text style={{marginTop: '7em'}}>
+            <Container text>
                 {isLoading ? (
                     <Icon name='spinner' loading={true}/>
                 ) : (
                     <PostPreview post={post}/>
                 )}
-
+                <Comments/>
             </Container>
         );
     }
