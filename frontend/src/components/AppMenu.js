@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dropdown, Menu} from 'semantic-ui-react'
+import {Button, Dropdown, Menu} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {loadCategories} from "../actions/categories";
 import {connect} from "react-redux";
@@ -38,6 +38,9 @@ class AppMenu extends Component {
                             <Dropdown.Item>Score</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
+                    <Menu.Item>
+                        <Button primary>Create Post</Button>
+                    </Menu.Item>
                 </Menu.Menu>
 
             </Menu>
