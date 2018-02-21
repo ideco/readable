@@ -42,7 +42,7 @@ class PostList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        posts: state.posts.allPosts,
+        posts: state.posts.elements,
         category: ownProps.match.params.category,
     }
 };

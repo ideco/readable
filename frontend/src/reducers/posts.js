@@ -2,7 +2,7 @@ import {ALL_POSTS_LOADING, LOAD_POSTS, LOAD_SINGLE_POST, SELECTED_POST_LOADING, 
 
 const postsDefaultState = {
     isLoading: true,
-    allPosts: [],
+    elements: [],
 };
 
 export function posts(state = postsDefaultState, action) {
@@ -14,17 +14,17 @@ export function posts(state = postsDefaultState, action) {
             };
         case LOAD_POSTS:
             return {
-                allPosts: action.posts,
+                elements: action.posts,
                 isLoading: true
             };
         case LOAD_SINGLE_POST:
             return {
-                allPosts: [action.post],
+                elements: [action.post],
                 isLoading: false
             };
         case VOTE_POST:
             return {
-                allPosts: state.allPosts.map((post) => {
+                elements: state.elements.map((post) => {
                     if (post.id === action.post.id) {
                         return action.post;
                     }
