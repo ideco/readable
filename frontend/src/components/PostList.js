@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Card, Container, Header} from 'semantic-ui-react'
 import {connect} from 'react-redux';
-import {loadPosts} from '../actions/posts';
+import {loadPosts, vote} from '../actions/posts';
 
 import PostPreview from "./PostPreview";
 
@@ -25,13 +25,14 @@ class PostList extends Component {
     }
 
     render() {
-        const {posts, category} = this.props;
+        const {posts, category, votePost} = this.props;
         return (
             <Container text style={{marginTop: '3em'}}>
                 <Header as='h1'>{PostList.createTitle(category)}</Header>
                 <Card.Group>
                     {posts.map((post) =>
-                        <PostPreview key={post.id} post={post}/>
+                        <PostPreview key={post.id} post={post} upVote={() => votePost(post.id, 'upVote')}
+                                     downVote={() => votePost(post.id, 'downVote')}/>
                     )}
                 </Card.Group>
             </Container>
@@ -48,7 +49,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: (category) => dispatch(loadPosts(category))
+        loadPosts: (category) => dispatch(loadPosts(category)),
+        votePost: (postId, option) => dispatch(vote(postId, option)),
     }
 };
 

@@ -17,6 +17,16 @@ export function posts(state = postsDefaultState, action) {
                 allPosts: action.posts,
                 isLoading: true
             };
+        case VOTE_POST:
+            return {
+                allPosts: state.allPosts.map((post) => {
+                    if (post.id === action.post.id) {
+                        return action.post;
+                    }
+                    return post;
+                }),
+                isLoading: false
+            };
         default:
             return state;
     }
@@ -40,7 +50,6 @@ export function selectedPost(state = selectedPostDefaultState, action) {
                 isLoading: false
             };
         case VOTE_POST:
-            console.log(action.post);
             return {
                 post: action.post,
                 isLoading: false
