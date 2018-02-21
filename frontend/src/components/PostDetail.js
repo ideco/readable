@@ -22,11 +22,7 @@ class PostDetail extends Component {
                 ) : (
                     <PostPreview post={post}/>
                 )}
-                {areCommentsLoading ? (
-                    <Icon name='spinner' loading={true}/>
-                ) : (
-                    <Comments comments={comments}/>
-                )}
+                <Comments comments={comments} loading={areCommentsLoading}/>
 
             </Container>
         );

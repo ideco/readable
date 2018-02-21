@@ -23,7 +23,7 @@ const PostPreview = props => {
                             Score: {post.voteScore}
                         </Grid.Column>
                         <Grid.Column textAlign='center'>
-                            <a>{post.commentCount} comments</a>
+                            <Link to={`/${post.category}/${post.id}`}> {post.commentCount} comments</Link>
                         </Grid.Column>
                         <Grid.Column textAlign='right'>
                             <a><Icon link name='edit'/></a>
