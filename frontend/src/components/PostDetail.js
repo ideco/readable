@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 
     return {
         isPostLoading: state.posts.isLoading,
-        post: state.posts.elements[0],
+        post: state.posts.elements ? state.posts.elements[0] : null,
         areCommentsLoading: state.comments.isLoading,
         comments: state.comments.comments
     }
