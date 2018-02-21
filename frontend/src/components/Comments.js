@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Comment, Header, Icon} from 'semantic-ui-react'
 import PostComment from "./PostComment";
-import {loadComments} from "../actions/comments";
+import {loadComments, vote} from "../actions/comments";
 import {connect} from "react-redux";
 
 class Comments extends Component {
@@ -11,12 +11,15 @@ class Comments extends Component {
     }
 
     render() {
-        const {comments, loading} = this.props;
+        const {comments, loading, vote} = this.props;
         return (
             <Comment.Group threaded>
                 <Header as='h3' dividing>Comments</Header>
                 {!loading ? (
-                    comments.map((comment) => <PostComment key={comment.id} comment={comment}/>)
+                    comments.map((comment) =>
+                        <PostComment key={comment.id} comment={comment}
+                                     upVote={() => vote(comment.id, 'upVote')}
+                                     downVote={() => vote(comment.id, 'downVote')}/>)
                 ) : (
                     <Icon name='spinner' loading={true}/>
                 )}
@@ -35,6 +38,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadComments: (postId) => dispatch(loadComments(postId)),
+        vote: (commentId, option) => dispatch(vote(commentId, option))
     }
 };
 

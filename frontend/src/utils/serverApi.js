@@ -37,3 +37,14 @@ export function votePost(postId, option) {
         body: JSON.stringify({option})
     }).then(data => data.json())
 }
+
+export function voteComment(commentId, option) {
+    return fetch(`http://localhost:3001/comments/${commentId}`, {
+        method: 'POST',
+        headers: {
+            Authorization: 'whatever-you-want',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({option})
+    }).then(data => data.json())
+}

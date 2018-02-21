@@ -1,4 +1,4 @@
-import {COMMENTS_LOADING, LOAD_COMMENTS} from "../actions/comments";
+import {COMMENTS_LOADING, LOAD_COMMENTS, VOTE_COMMENT} from "../actions/comments";
 
 const commentsDefaultState = {
     isLoading: true,
@@ -16,6 +16,15 @@ export function comments(state = commentsDefaultState, action) {
             return {
                 comments: action.comments,
                 isLoading: false
+            };
+        case VOTE_COMMENT:
+            return {
+                comments: state.comments.map((comment) => {
+                    if (comment.id === action.comment.id) {
+                        return action.comment;
+                    }
+                    return comment;
+                })
             };
         default:
             return state;

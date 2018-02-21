@@ -10,9 +10,11 @@ const PostComment = props => {
                     <Grid.Row>
                         <Grid.Column width={3}>
                             <Button.Group>
-                                <Button icon basic><Icon link name='chevron circle up' color='green'/></Button>
+                                <Button icon basic onClick={props.upVote}><Icon link name='chevron circle up'
+                                                                                color='green'/></Button>
                                 <Button.Or text={comment.voteScore}/>
-                                <Button icon basic><Icon link name='chevron circle down' color='red'/></Button>
+                                <Button icon basic onClick={props.downVote}><Icon link name='chevron circle down'
+                                                                                  color='red'/></Button>
                             </Button.Group>
                         </Grid.Column>
                         <Grid.Column width={13}>
