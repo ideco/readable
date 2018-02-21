@@ -33,8 +33,8 @@ class PostDetail extends Component {
 const mapStateToProps = (state) => {
 
     return {
-        isPostLoading: state.selectedPost.isLoading,
-        post: state.selectedPost.post,
+        isPostLoading: state.posts.isLoading,
+        post: state.posts.allPosts[0],
         areCommentsLoading: state.comments.isLoading,
         comments: state.comments.comments
     }

@@ -17,6 +17,11 @@ export function posts(state = postsDefaultState, action) {
                 allPosts: action.posts,
                 isLoading: true
             };
+        case LOAD_SINGLE_POST:
+            return {
+                allPosts: [action.post],
+                isLoading: false
+            };
         case VOTE_POST:
             return {
                 allPosts: state.allPosts.map((post) => {
@@ -25,33 +30,6 @@ export function posts(state = postsDefaultState, action) {
                     }
                     return post;
                 }),
-                isLoading: false
-            };
-        default:
-            return state;
-    }
-}
-
-const selectedPostDefaultState = {
-    post: null,
-    isLoading: true
-};
-
-export function selectedPost(state = selectedPostDefaultState, action) {
-    switch (action.type) {
-        case SELECTED_POST_LOADING:
-            return {
-                ...state,
-                isLoading: true
-            };
-        case LOAD_SINGLE_POST:
-            return {
-                post: action.post,
-                isLoading: false
-            };
-        case VOTE_POST:
-            return {
-                post: action.post,
                 isLoading: false
             };
         default:
