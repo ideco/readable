@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
 import {Comment, Header, Icon} from 'semantic-ui-react'
 import PostComment from "./PostComment";
+import {loadComments} from "../actions/comments";
+import {connect} from "react-redux";
 
 class Comments extends Component {
+
+    componentDidMount() {
+        this.props.loadComments(this.props.postId)
+    }
+
     render() {
         const {comments, loading} = this.props;
         return (
@@ -18,4 +25,19 @@ class Comments extends Component {
     }
 }
 
-export default Comments
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+        loading: state.comments.isLoading,
+        comments: state.comments.comments,
+        postId: ownProps.post.id
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadComments: (postId) => dispatch(loadComments(postId)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comments)

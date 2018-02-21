@@ -14,17 +14,18 @@ class PostDetail extends Component {
     }
 
     render() {
-        const {isPostLoading, post, areCommentsLoading, comments, votePost} = this.props;
+        const {isPostLoading, post, votePost} = this.props;
         return (
             <Container text>
                 {isPostLoading ? (
                     <Icon name='spinner' loading={true}/>
                 ) : (
-                    <PostPreview post={post} upVote={() => votePost(post.id, 'upVote')}
-                                 downVote={() => votePost(post.id, 'downVote')}/>
+                    <div>
+                        <PostPreview post={post} upVote={() => votePost(post.id, 'upVote')}
+                                     downVote={() => votePost(post.id, 'downVote')}/>
+                        <Comments post={post}/>
+                    </div>
                 )}
-                <Comments comments={comments} loading={areCommentsLoading}/>
-
             </Container>
         );
     }
@@ -35,8 +36,6 @@ const mapStateToProps = (state) => {
     return {
         isPostLoading: state.posts.isLoading,
         post: state.posts.elements ? state.posts.elements[0] : null,
-        areCommentsLoading: state.comments.isLoading,
-        comments: state.comments.comments
     }
 };
 
