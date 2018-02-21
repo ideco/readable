@@ -10,11 +10,13 @@ const PostComment = props => {
                     <Grid.Row>
                         <Grid.Column width={3}>
                             <Button.Group>
-                                <Button icon basic onClick={props.upVote}><Icon link name='chevron circle up'
-                                                                                color='green'/></Button>
+                                <Button icon basic onClick={props.upVote}>
+                                    <Icon link name='chevron circle up' color='green'/>
+                                </Button>
                                 <Button.Or text={comment.voteScore}/>
-                                <Button icon basic onClick={props.downVote}><Icon link name='chevron circle down'
-                                                                                  color='red'/></Button>
+                                <Button icon basic onClick={props.downVote}>
+                                    <Icon link name='chevron circle down' color='red'/>
+                                </Button>
                             </Button.Group>
                         </Grid.Column>
                         <Grid.Column width={13}>
@@ -22,8 +24,7 @@ const PostComment = props => {
                             <Comment.Metadata>
                                 <span>{new Date(comment.timestamp).toLocaleString()}</span>
                             </Comment.Metadata>
-                            <Comment.Text>{comment.body}
-                            </Comment.Text>
+                            <Comment.Text> {comment.body} </Comment.Text>
                             <Comment.Actions>
                                 <Comment.Action>
                                     <Icon link name='edit'/>

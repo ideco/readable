@@ -15,12 +15,9 @@ class AppMenu extends Component {
         const {categories, selectedCategory} = this.props;
         return (
             <Menu pointing secondary>
-
                 <Menu.Item as={Link} to='/' header>
                     Readable
                 </Menu.Item>
-
-
                 <Menu.Item active={selectedCategory == null} as={Link} to={'/'}>
                     all
                 </Menu.Item>
@@ -30,7 +27,6 @@ class AppMenu extends Component {
                         {category.name}
                     </Menu.Item>
                 )}
-
                 <Menu.Menu position='right'>
                     <Dropdown item simple text='Sort by'>
                         <Dropdown.Menu>
