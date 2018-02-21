@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 class Comments extends Component {
 
     componentDidMount() {
-        this.props.loadComments(this.props.postId)
+        this.props.loadComments(this.props.match.params.postId)
     }
 
     render() {
@@ -25,12 +25,10 @@ class Comments extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-
+const mapStateToProps = (state) => {
     return {
         loading: state.comments.isLoading,
         comments: state.comments.comments,
-        postId: ownProps.post.id
     }
 };
 

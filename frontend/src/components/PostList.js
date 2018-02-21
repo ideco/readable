@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Container, Header} from 'semantic-ui-react'
+import {Card, Header} from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import {loadPosts, vote} from '../actions/posts';
 
@@ -27,7 +27,7 @@ class PostList extends Component {
     render() {
         const {posts, category, votePost} = this.props;
         return (
-            <Container text style={{marginTop: '3em'}}>
+            <div>
                 <Header as='h1'>{PostList.createTitle(category)}</Header>
                 <Card.Group>
                     {posts.map((post) =>
@@ -35,7 +35,7 @@ class PostList extends Component {
                                      downVote={() => votePost(post.id, 'downVote')}/>
                     )}
                 </Card.Group>
-            </Container>
+            </div>
         );
     }
 }

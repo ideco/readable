@@ -5,6 +5,8 @@ import PostList from "./components/PostList";
 import AppMenu from "./components/AppMenu";
 import Footer from "./components/Footer";
 import PostDetail from "./components/PostDetail";
+import Comments from "./components/Comments";
+import {Container} from "semantic-ui-react";
 
 
 class App extends Component {
@@ -13,9 +15,12 @@ class App extends Component {
             <div>
                 <Route exact path="/" component={AppMenu}/>
                 <Route path="/:category" component={AppMenu}/>
-                <Route exact path="/" component={PostList}/>
-                <Route exact path="/:category" component={PostList}/>
-                <Route exact path="/:category/:postId" component={PostDetail}/>
+                <Container text>
+                    <Route exact path="/" component={PostList}/>
+                    <Route exact path="/:category" component={PostList}/>
+                    <Route exact path="/:category/:postId" component={PostDetail}/>
+                    <Route exact path="/:category/:postId" component={Comments}/>
+                </Container>
                 <Footer/>
             </div>
         );
