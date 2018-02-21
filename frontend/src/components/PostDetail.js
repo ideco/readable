@@ -13,10 +13,10 @@ class PostDetail extends Component {
     }
 
     render() {
-        const {isPostLoading, post, votePost} = this.props;
+        const {loading, post, votePost} = this.props;
         return (
             <div>
-                {isPostLoading ? (
+                {loading ? (
                     <Icon name='spinner' loading={true}/>
                 ) : (
 
@@ -30,9 +30,8 @@ class PostDetail extends Component {
 }
 
 const mapStateToProps = (state) => {
-
     return {
-        isPostLoading: state.posts.isLoading,
+        loading: state.posts.isLoading,
         post: state.posts.elements ? state.posts.elements[0] : null,
     }
 };

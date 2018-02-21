@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 const PostPreview = props => {
     const {post, upVote, downVote} = props;
     return (
-        <Card fluid>
+        <Card fluid raised>
             <Card.Content>
                 <Card.Header as={Link} to={`/${post.category}/${post.id}`}>{post.title}</Card.Header>
                 <Card.Meta>Submitted by <em>{post.author}</em> to
