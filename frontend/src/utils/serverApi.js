@@ -26,3 +26,14 @@ export function fetchCategories() {
 export function fetchComments(postId) {
     return baseFetch(`posts/${postId}/comments`)
 }
+
+export function votePost(postId, option) {
+    return fetch(`http://localhost:3001/posts/${postId}`, {
+        method: 'POST',
+        headers: {
+            Authorization: 'whatever-you-want',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({option})
+    }).then(data => data.json())
+}

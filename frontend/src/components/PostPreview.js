@@ -3,7 +3,7 @@ import {Card, Grid, Icon} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 const PostPreview = props => {
-    const {post} = props;
+    const {post, upVote, downVote} = props;
     return (
         <Card fluid>
             <Card.Content>
@@ -18,8 +18,8 @@ const PostPreview = props => {
                 <Grid columns='equal'>
                     <Grid.Row>
                         <Grid.Column>
-                            <a><Icon link color='green' name='chevron circle up'/></a>
-                            <a><Icon link color='red' name='chevron circle down'/></a>
+                            <a onClick={upVote}><Icon link color='green' name='chevron circle up'/></a>
+                            <a onClick={downVote}><Icon link color='red' name='chevron circle down'/></a>
                             Score: {post.voteScore}
                         </Grid.Column>
                         <Grid.Column textAlign='center'>

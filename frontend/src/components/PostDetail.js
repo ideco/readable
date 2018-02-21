@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Icon} from "semantic-ui-react";
-import {loadSinglePost} from "../actions/posts";
+import {loadSinglePost, vote} from "../actions/posts";
 import {connect} from 'react-redux';
 import PostPreview from "./PostPreview";
 import Comments from "./Comments";
@@ -14,13 +14,14 @@ class PostDetail extends Component {
     }
 
     render() {
-        const {isPostLoading, post, areCommentsLoading, comments} = this.props;
+        const {isPostLoading, post, areCommentsLoading, comments, votePost} = this.props;
         return (
             <Container text>
                 {isPostLoading ? (
                     <Icon name='spinner' loading={true}/>
                 ) : (
-                    <PostPreview post={post}/>
+                    <PostPreview post={post} upVote={() => votePost(post.id, 'upVote')}
+                                 downVote={() => votePost(post.id, 'downVote')}/>
                 )}
                 <Comments comments={comments} loading={areCommentsLoading}/>
 
@@ -42,7 +43,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadSinglePost: (postId) => dispatch(loadSinglePost(postId)),
-        loadComments: (postId) => dispatch(loadComments(postId))
+        loadComments: (postId) => dispatch(loadComments(postId)),
+        votePost: (postId, option) => dispatch(vote(postId, option)),
+
     }
 };
 

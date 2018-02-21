@@ -1,4 +1,4 @@
-import {ALL_POSTS_LOADING, LOAD_POSTS, LOAD_SINGLE_POST, SELECTED_POST_LOADING} from '../actions/posts'
+import {ALL_POSTS_LOADING, LOAD_POSTS, LOAD_SINGLE_POST, SELECTED_POST_LOADING, VOTE_POST} from '../actions/posts'
 
 const postsDefaultState = {
     isLoading: true,
@@ -35,6 +35,12 @@ export function selectedPost(state = selectedPostDefaultState, action) {
                 isLoading: true
             };
         case LOAD_SINGLE_POST:
+            return {
+                post: action.post,
+                isLoading: false
+            };
+        case VOTE_POST:
+            console.log(action.post);
             return {
                 post: action.post,
                 isLoading: false
