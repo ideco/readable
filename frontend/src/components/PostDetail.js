@@ -19,10 +19,10 @@ class PostDetail extends Component {
                 {loading ? (
                     <Icon name='spinner' loading={true}/>
                 ) : (
-
-                    <PostPreview post={post} upVote={() => votePost(post.id, 'upVote')}
-                                 downVote={() => votePost(post.id, 'downVote')}/>
-
+                    <PostPreview post={post}
+                                 upVote={() => votePost(post.id, 'upVote')}
+                                 downVote={() => votePost(post.id, 'downVote')}
+                    />
                 )}
             </div>
         );
