@@ -1,4 +1,4 @@
-import {ALL_POSTS_LOADING, LOAD_POSTS, LOAD_SINGLE_POST, SELECTED_POST_LOADING, VOTE_POST} from '../actions/posts'
+import {ALL_POSTS_LOADING, LOAD_POSTS, LOAD_SINGLE_POST, VOTE_POST} from '../actions/posts'
 
 const postsDefaultState = {
     isLoading: true,
