@@ -20,12 +20,13 @@ export function loadPosts(category) {
     }
 }
 
-export function loadSinglePost(id) {
+export function loadSinglePost(category, id) {
     return (dispatch) => {
         dispatch({
             type: ALL_POSTS_LOADING
         });
         return fetchPostDetails(id)
+        // TODO
             .then((post) => dispatch({
                 type: LOAD_SINGLE_POST,
                 post

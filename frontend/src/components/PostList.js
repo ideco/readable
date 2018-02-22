@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadPosts: (category, postId) => {
             if (postId) {
-                dispatch(loadSinglePost(postId))
+                dispatch(loadSinglePost(category, postId))
             } else {
                 dispatch(loadPosts(category))
             }

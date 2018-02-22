@@ -11,7 +11,7 @@ const defaultData = {
     body: 'Hi there! I am a COMMENT.',
     author: 'thingtwo',
     voteScore: 6,
-    deleted: false,
+    deleted: true,
     parentDeleted: false
   },
   "8tu4bsun805n8un48ve89": {
