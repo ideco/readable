@@ -14,7 +14,7 @@ export function loadPosts(category) {
         return fetchPosts(category)
             .then((posts) => dispatch({
                 type: LOAD_POSTS,
-                posts,
+                posts: posts.filter(post => !post.deleted),
                 category
             }))
     }

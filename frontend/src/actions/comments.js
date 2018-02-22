@@ -13,7 +13,7 @@ export function loadComments(postId) {
         return fetchComments(postId)
             .then((comments) => dispatch({
                 type: LOAD_COMMENTS,
-                comments
+                comments: comments.filter(comment => !comment.deleted)
             }))
     }
 }

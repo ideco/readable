@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {Card} from 'semantic-ui-react'
 import {connect} from 'react-redux';
-import {loadPosts, vote} from '../actions/posts';
+import {loadPosts, loadSinglePost, vote} from '../actions/posts';
 
 import PostPreview from "./PostPreview";
 
 class PostList extends Component {
 
     componentDidMount() {
-        this.props.loadPosts(this.props.match.params.category)
+        let params = this.props.match.params;
+        this.props.loadPosts(params.category, params.postId)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -41,7 +42,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: (category) => dispatch(loadPosts(category)),
+        loadPosts: (category, postId) => {
+            if (postId) {
+                dispatch(loadSinglePost(postId))
+            } else {
+                dispatch(loadPosts(category))
+            }
+        },
         votePost: (postId, option) => dispatch(vote(postId, option)),
     }
 };
