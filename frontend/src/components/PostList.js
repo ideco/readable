@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Header} from 'semantic-ui-react'
+import {Card} from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import {loadPosts, vote} from '../actions/posts';
 
@@ -17,18 +17,10 @@ class PostList extends Component {
         }
     }
 
-    static createTitle(category) {
-        if (!category) {
-            return "Posts from All Categories"
-        }
-        return `Posts from Category "${category}"`
-    }
-
     render() {
-        const {posts, category, votePost} = this.props;
+        const {posts, votePost} = this.props;
         return (
             <div>
-                <Header as='h1'>{PostList.createTitle(category)}</Header>
                 <Card.Group>
                     {posts.map((post) =>
                         <PostPreview key={post.id} post={post} upVote={() => votePost(post.id, 'upVote')}
