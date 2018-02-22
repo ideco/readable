@@ -1,8 +1,9 @@
 import {ALL_POSTS_LOADING, LOAD_POSTS, LOAD_SINGLE_POST, SORT, VOTE_POST} from '../actions/posts'
+import {arrayToObject} from "../utils/arrayUtils";
 
 const postsDefaultState = {
     isLoading: true,
-    elements: [],
+    elements: {},
     sort: 'timestamp'
 };
 
@@ -16,24 +17,25 @@ export function posts(state = postsDefaultState, action) {
         case LOAD_POSTS:
             return {
                 ...state,
-                elements: action.posts,
+                elements: arrayToObject(action.posts, 'id'),
                 isLoading: true
             };
         case LOAD_SINGLE_POST:
             return {
                 ...state,
-                elements: [action.post],
+                elements: arrayToObject([action.post]),
                 isLoading: false
             };
         case VOTE_POST:
             return {
                 ...state,
-                elements: state.elements.map((post) => {
-                    if (post.id === action.post.id) {
-                        return action.post;
+                elements: {
+                    ...state.elements,
+                    [action.post.id]: {
+                        ...state.elements[action.post.id],
+                        voteScore: action.post.voteScore
                     }
-                    return post;
-                }),
+                },
                 isLoading: false
             };
         case SORT:

@@ -23,7 +23,7 @@ class PostList extends Component {
         return (
             <div>
                 <Card.Group>
-                    {posts.map((post) =>
+                    {Object.entries(posts).map(e => e[1]).map((post) =>
                         <PostPreview key={post.id} post={post} upVote={() => votePost(post.id, 'upVote')}
                                      downVote={() => votePost(post.id, 'downVote')}/>
                     )}
