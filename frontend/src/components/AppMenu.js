@@ -3,6 +3,7 @@ import {Button, Dropdown, Menu} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {loadCategories} from "../actions/categories";
 import {connect} from "react-redux";
+import {sortBy} from "../actions/posts";
 
 
 class AppMenu extends Component {
@@ -12,7 +13,7 @@ class AppMenu extends Component {
     }
 
     render() {
-        const {categories, selectedCategory} = this.props;
+        const {categories, selectedCategory, sort} = this.props;
         return (
             <Menu pointing secondary>
                 <Menu.Item as={Link} to='/' header>
@@ -30,8 +31,8 @@ class AppMenu extends Component {
                 <Menu.Menu position='right'>
                     <Dropdown item simple text='Sort by'>
                         <Dropdown.Menu>
-                            <Dropdown.Item>Date</Dropdown.Item>
-                            <Dropdown.Item>Score</Dropdown.Item>
+                            <Dropdown.Item onClick={sort('timestamp')}>Date</Dropdown.Item>
+                            <Dropdown.Item onClick={sort('score')}>Score</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                     <Menu.Item>
@@ -53,7 +54,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadCategories: () => dispatch(loadCategories())
+        loadCategories: () => dispatch(loadCategories()),
+        sort: (property) => () => dispatch(sortBy(property))
     }
 };
 

@@ -5,6 +5,7 @@ export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_SINGLE_POST = 'LOAD_SINGLE_POST';
 export const POST_VOTING = 'POST_VOTING';
 export const VOTE_POST = 'VOTE_POST';
+export const SORT = 'SORT';
 
 export function loadPosts(category) {
     return (dispatch) => {
@@ -31,6 +32,15 @@ export function loadSinglePost(category, id) {
                 type: LOAD_SINGLE_POST,
                 post
             }))
+    }
+}
+
+export function sortBy(property) {
+    return (dispatch) => {
+        dispatch({
+            type: SORT,
+            sort: property
+        })
     }
 }
 
