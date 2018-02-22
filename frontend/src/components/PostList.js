@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {loadPosts, loadSinglePost, vote} from '../actions/posts';
 
 import PostPreview from "./PostPreview";
+import {getPosts} from "../selectors";
 
 class PostList extends Component {
 
@@ -23,9 +24,9 @@ class PostList extends Component {
         return (
             <div>
                 <Card.Group>
-                    {Object.entries(posts).map(e => e[1]).map((post) =>
-                        <PostPreview key={post.id} post={post} upVote={() => votePost(post.id, 'upVote')}
-                                     downVote={() => votePost(post.id, 'downVote')}/>
+                    {posts.map((post) =>
+                        <PostPreview key={post.id} post={post} upVote={(postId) => votePost(postId, 'upVote')}
+                                     downVote={(postId) => votePost(postId, 'downVote')}/>
                     )}
                 </Card.Group>
             </div>
@@ -35,7 +36,7 @@ class PostList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        posts: state.posts.elements,
+        posts: getPosts(state),
         category: ownProps.match.params.category,
     }
 };

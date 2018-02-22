@@ -19,9 +19,11 @@ const PostPreview = props => {
                     <Grid.Row>
                         <Grid.Column>
                             <Button.Group>
-                                <Button icon positive onClick={upVote}><Icon name='chevron circle up'/></Button>
+                                <Button icon positive onClick={() => upVote(post.id)}><Icon
+                                    name='chevron circle up'/></Button>
                                 <Button.Or text={post.voteScore}/>
-                                <Button icon negative onClick={downVote}><Icon name='chevron circle down'/></Button>
+                                <Button icon negative onClick={() => downVote(post.id)}><Icon
+                                    name='chevron circle down'/></Button>
                             </Button.Group>
                         </Grid.Column>
                         <Grid.Column textAlign='center'>

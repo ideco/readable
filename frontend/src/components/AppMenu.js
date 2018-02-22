@@ -32,7 +32,7 @@ class AppMenu extends Component {
                     <Dropdown item simple text='Sort by'>
                         <Dropdown.Menu>
                             <Dropdown.Item onClick={sort('timestamp')}>Date</Dropdown.Item>
-                            <Dropdown.Item onClick={sort('score')}>Score</Dropdown.Item>
+                            <Dropdown.Item onClick={sort('voteScore')}>Score</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                     <Menu.Item>
