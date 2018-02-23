@@ -1,31 +1,41 @@
-import {ALL_POSTS_LOADING, LOAD_POSTS, LOAD_SINGLE_POST, SORT, VOTE_POST} from '../actions/posts'
+import {LOAD_POSTS_FAILURE, LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS, SORT, VOTE_POST} from '../actions/posts'
 import {arrayToObject} from "../utils/arrayUtils";
+import {createReducer} from "./index";
 
-const postsDefaultState = {
+const postsInitialState = {
     isLoading: true,
     elements: {},
-    sort: 'timestamp'
+    sort: 'timestamp',
+    error: null
 };
 
-export function posts(state = postsDefaultState, action) {
+export const posts = createReducer(postsInitialState, {
+    [LOAD_POSTS_REQUEST](state, action) {
+        return {
+            ...state,
+            isLoading: true,
+            error: null
+        };
+    },
+    [LOAD_POSTS_SUCCESS](state, action) {
+        return {
+            ...state,
+            elements: arrayToObject(action.response, 'id'),
+            isLoading: false,
+            error: null
+        };
+    },
+    [LOAD_POSTS_FAILURE](state, action) {
+        return {
+            ...state,
+            isLoading: false,
+            error: action.error
+        };
+    }
+});
+
+export function posts2(state = postsInitialState, action) {
     switch (action.type) {
-        case ALL_POSTS_LOADING:
-            return {
-                ...state,
-                isLoading: true
-            };
-        case LOAD_POSTS:
-            return {
-                ...state,
-                elements: arrayToObject(action.posts, 'id'),
-                isLoading: true
-            };
-        case LOAD_SINGLE_POST:
-            return {
-                ...state,
-                elements: arrayToObject([action.post], 'id'),
-                isLoading: false
-            };
         case VOTE_POST:
             return {
                 ...state,

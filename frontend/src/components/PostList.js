@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Card} from 'semantic-ui-react'
 import {connect} from 'react-redux';
-import {loadPosts, loadSinglePost, vote} from '../actions/posts';
+import {loadPosts, vote} from '../actions/posts';
 
 import PostPreview from "./PostPreview";
 import {getPosts} from "../selectors";
@@ -43,13 +43,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: (category, postId) => {
-            if (postId) {
-                dispatch(loadSinglePost(category, postId))
-            } else {
-                dispatch(loadPosts(category))
-            }
-        },
+        loadPosts: (category, postId) => dispatch(loadPosts(category, postId)),
         votePost: (postId, option) => dispatch(vote(postId, option)),
     }
 };
