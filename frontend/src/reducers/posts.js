@@ -3,7 +3,7 @@ import {arrayToObject} from "../utils/arrayUtils";
 import {createReducer} from "./index";
 
 const postsInitialState = {
-    isLoading: true,
+    postsLoading: true,
     elements: {},
     sort: 'timestamp',
     error: null
@@ -13,7 +13,7 @@ export const posts = createReducer(postsInitialState, {
     [LOAD_POSTS_REQUEST](state, action) {
         return {
             ...state,
-            isLoading: true,
+            postsLoading: true,
             error: null
         };
     },
@@ -21,14 +21,14 @@ export const posts = createReducer(postsInitialState, {
         return {
             ...state,
             elements: arrayToObject(action.response, 'id'),
-            isLoading: false,
+            postsLoading: false,
             error: null
         };
     },
     [LOAD_POSTS_FAILURE](state, action) {
         return {
             ...state,
-            isLoading: false,
+            postsLoading: false,
             error: action.error
         };
     }
@@ -46,7 +46,7 @@ export function posts2(state = postsInitialState, action) {
                         voteScore: action.post.voteScore
                     }
                 },
-                isLoading: false
+                postsLoading: false
             };
         case SORT:
             return {
