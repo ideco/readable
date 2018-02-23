@@ -22,7 +22,7 @@ export function loadPosts(category, postId) {
     }
 }
 
-export const VOTE_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
+export const VOTE_POSTS_REQUEST = 'VOTE_POSTS_REQUEST';
 export const VOTE_POSTS_SUCCESS = 'VOTE_POSTS_SUCCESS';
 export const VOTE_POSTS_FAILURE = 'VOTE_POSTS_FAILURE';
 
