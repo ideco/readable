@@ -23,7 +23,7 @@ export function posts(state = postsDefaultState, action) {
         case LOAD_SINGLE_POST:
             return {
                 ...state,
-                elements: arrayToObject([action.post]),
+                elements: arrayToObject([action.post], 'id'),
                 isLoading: false
             };
         case VOTE_POST:
