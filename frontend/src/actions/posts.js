@@ -2,7 +2,6 @@ import {fetchPosts, votePost} from "../utils/postsApi";
 import {arrayOfPosts} from "../store/schema";
 
 export const LOAD_POSTS = 'LOAD_POSTS';
-export const VOTE_POST = 'VOTE_POST';
 export const SORT_POSTS = 'SORT_POSTS';
 
 

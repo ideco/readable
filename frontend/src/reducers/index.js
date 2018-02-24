@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux'
 import {posts} from './posts';
-import {categories, selectedCategory} from './categories'
+import {categories} from './categories'
 import {comments} from "./comments";
 import {votes} from "./votes";
 
@@ -20,6 +20,5 @@ export default combineReducers({
     posts,
     votes,
     categories,
-    selectedCategory,
     comments
 });
