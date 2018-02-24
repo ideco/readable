@@ -1,5 +1,6 @@
 const BASE_URL = 'http://localhost:3001';
 
+
 function baseFetch(relPath) {
     return fetch(`${BASE_URL}/${relPath}`,
         {
@@ -9,6 +10,17 @@ function baseFetch(relPath) {
 }
 
 export function fetchPosts(category, postId) {
+    return doFetchPosts(category, postId)
+        .then((posts) => (posts.map((post) => ({
+            ...post,
+            voteScore: {
+                id: post.id,
+                voteScore: post.voteScore
+            }
+        }))));
+}
+
+function doFetchPosts(category, postId) {
     if (category) {
         if (postId) {
             return fetchSinglePost(category, postId);
