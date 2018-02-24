@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getVotes, makeGetVotes} from "../selectors";
+import {getVotes, makeGetVote} from "../selectors";
 import {Button, Icon} from 'semantic-ui-react'
 
 class Vote extends Component {
@@ -22,7 +22,7 @@ class Vote extends Component {
 }
 
 function makeMapStateToProps() {
-    const getVotes = makeGetVotes();
+    const getVotes = makeGetVote();
     const mapStateToProps = (state, props) => {
         return {
             voteScore: getVotes(state, props.id),

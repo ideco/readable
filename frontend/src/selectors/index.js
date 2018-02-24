@@ -4,7 +4,7 @@ import _ from 'lodash'
 const getPostsById = state => state.posts.byId;
 const getSortProperty = state => state.posts.sort;
 
-const getVotes = (state, id) => state.votes.byId[id];
+const getVote = (state, id) => state.votes.byId[id];
 
 export const getPosts = createSelector(
     [getPostsById, getSortProperty],
@@ -13,9 +13,9 @@ export const getPosts = createSelector(
     }
 );
 
-export const makeGetVotes = () => {
+export const makeGetVote = () => {
     return createSelector(
-        [getVotes],
+        [getVote],
         (votes) => {
             return votes;
         }
