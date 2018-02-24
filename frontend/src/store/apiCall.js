@@ -1,6 +1,6 @@
 import {normalize} from 'normalizr'
 
-export function callAPIMiddleware({dispatch, getState}) {
+export function apiCall({dispatch, getState}) {
     return next => action => {
 
         const {

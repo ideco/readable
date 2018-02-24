@@ -1,5 +1,4 @@
-import {votePost} from '../utils/serverApi'
-import {fetchPosts} from "../utils/postsApi";
+import {fetchPosts, votePost} from "../utils/postsApi";
 import {arrayOfPosts} from "../store/schema";
 
 export const LOAD_POSTS = 'LOAD_POSTS';
@@ -27,7 +26,6 @@ export function loadPosts(category, postId) {
 export const VOTE_POSTS_REQUEST = 'VOTE_POSTS_REQUEST';
 export const VOTE_POSTS_SUCCESS = 'VOTE_POSTS_SUCCESS';
 export const VOTE_POSTS_FAILURE = 'VOTE_POSTS_FAILURE';
-
 export function vote(postId, option) {
     return {
         types: [
@@ -36,6 +34,7 @@ export function vote(postId, option) {
             VOTE_POSTS_FAILURE
         ],
         callAPI: () => votePost(postId, option),
+        schema: arrayOfPosts,
         payload: {postId, option}
     }
 }

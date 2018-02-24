@@ -31,7 +31,7 @@ export const posts = createReducer(postsInitialState, {
             postsLoading: false,
             error: action.error
         };
-    }
+    },
 });
 
 export function posts2(state = postsInitialState, action) {
