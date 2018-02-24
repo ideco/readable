@@ -1,13 +1,13 @@
 import {LOAD_POSTS_FAILURE, LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS, SORT, VOTE_POST} from '../actions/posts'
-import {arrayToObject} from "../utils/arrayUtils";
 import {createReducer} from "./index";
 
 const postsInitialState = {
     postsLoading: true,
-    elements: {},
+    byId: {},
     sort: 'timestamp',
     error: null
 };
+
 
 export const posts = createReducer(postsInitialState, {
     [LOAD_POSTS_REQUEST](state, action) {
@@ -20,7 +20,7 @@ export const posts = createReducer(postsInitialState, {
     [LOAD_POSTS_SUCCESS](state, action) {
         return {
             ...state,
-            elements: arrayToObject(action.response, 'id'),
+            byId: action.response,
             postsLoading: false,
             error: null
         };
@@ -39,10 +39,10 @@ export function posts2(state = postsInitialState, action) {
         case VOTE_POST:
             return {
                 ...state,
-                elements: {
-                    ...state.elements,
+                byId: {
+                    ...state.byId,
                     [action.post.id]: {
-                        ...state.elements[action.post.id],
+                        ...state.byId[action.post.id],
                         voteScore: action.post.voteScore
                     }
                 },

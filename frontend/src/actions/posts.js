@@ -1,5 +1,6 @@
 import {votePost} from '../utils/serverApi'
 import {fetchPosts} from "../utils/postsApi";
+import {arrayOfPosts} from "../store/schema";
 
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const VOTE_POST = 'VOTE_POST';
@@ -18,7 +19,8 @@ export function loadPosts(category, postId) {
             LOAD_POSTS_FAILURE
         ],
         callAPI: () => fetchPosts(category, postId),
-        payload: {category, postId}
+        schema: arrayOfPosts,
+        payload: {category, postId},
     }
 }
 

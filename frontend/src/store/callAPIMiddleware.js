@@ -1,10 +1,13 @@
+import {normalize} from 'normalizr'
+
 export function callAPIMiddleware({dispatch, getState}) {
     return next => action => {
 
         const {
             types,
             callAPI,
-            payload = {}
+            payload = {},
+            schema = null
         } = action;
 
         if (!types) {
@@ -36,7 +39,7 @@ export function callAPIMiddleware({dispatch, getState}) {
             response =>
                 dispatch(
                     Object.assign({}, payload, {
-                        response,
+                        response: schema ? normalize(response, schema) : response,
                         type: successType
                     })
                 ),
