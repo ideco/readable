@@ -2,12 +2,22 @@ import {createSelector} from 'reselect'
 import _ from 'lodash'
 
 const getPostsById = state => state.posts.byId;
-const getVotesById = state => state.posts.votesById;
 const getSortProperty = state => state.posts.sort;
 
+const getVotes = (state, id) => state.votes.byId[id];
+
 export const getPosts = createSelector(
-    [getPostsById, getVotesById, getSortProperty],
-    (postsById, votesById, sortProperty) => {
+    [getPostsById, getSortProperty],
+    (postsById, sortProperty) => {
         return _.sortBy(_.values(postsById), sortProperty);
     }
 );
+
+export const makeGetVotes = () => {
+    return createSelector(
+        [getVotes],
+        (votes) => {
+            return votes;
+        }
+    );
+};

@@ -35,21 +35,39 @@ export function apiCall({dispatch, getState}) {
             })
         );
 
-        return callAPI().then(
-            response =>
-                dispatch(
-                    Object.assign({}, payload, {
-                        response: schema ? normalize(response, schema) : response,
-                        type: successType
-                    })
-                ),
-            error =>
-                dispatch(
-                    Object.assign({}, payload, {
-                        error,
-                        type: failureType
-                    })
-                )
-        )
+        return callAPI()
+            .then((response) => {
+                // sleep(2000);
+                return response;
+            })
+            .then(
+                response =>
+                    dispatch(
+                        Object.assign({}, payload, {
+                            response: schema ? normalize(response, schema) : response,
+                            type: successType
+                        })
+                    ),
+                error =>
+                    dispatch(
+                        Object.assign({}, payload, {
+                            error,
+                            type: failureType
+                        })
+                    )
+            )
+    }
+}
+
+function sleep(time) {
+
+    var start = new Date();
+    var now;
+
+    while (true) {
+        now = new Date();
+        if (now - start >= time) {
+            break;
+        }
     }
 }

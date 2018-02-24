@@ -31,7 +31,7 @@ function doFetchPosts(category, postId) {
 }
 
 export function votePost(postId, option) {
-    return fetch(`${BASE_URL}posts/${postId}`, {
+    return fetch(`${BASE_URL}/posts/${postId}`, {
         method: 'POST',
         headers: {
             Authorization: 'whatever-you-want',
@@ -39,6 +39,13 @@ export function votePost(postId, option) {
         },
         body: JSON.stringify({option})
     }).then(data => data.json())
+        .then((post) => ([{
+            ...post,
+            voteScore: {
+                id: post.id,
+                voteScore: post.voteScore
+            }
+        }]))
 }
 
 function fetchSinglePost(category, postId) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Card, Grid, Icon} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
+import Vote from "./Vote";
 
 const PostPreview = props => {
     const {post, upVote, downVote} = props;
@@ -18,13 +19,7 @@ const PostPreview = props => {
                 <Grid columns='equal'>
                     <Grid.Row>
                         <Grid.Column>
-                            <Button.Group>
-                                <Button icon positive onClick={() => upVote(post.id)}><Icon
-                                    name='chevron circle up'/></Button>
-                                <Button.Or text={post.voteScore}/>
-                                <Button icon negative onClick={() => downVote(post.id)}><Icon
-                                    name='chevron circle down'/></Button>
-                            </Button.Group>
+                            <Vote id={post.id} upVote={upVote} downVote={downVote}/>
                         </Grid.Column>
                         <Grid.Column textAlign='center'>
                             <Link to={`/${post.category}/${post.id}`}> {post.commentCount} comments</Link>

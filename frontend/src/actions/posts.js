@@ -3,7 +3,7 @@ import {arrayOfPosts} from "../store/schema";
 
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const VOTE_POST = 'VOTE_POST';
-export const SORT = 'SORT';
+export const SORT_POSTS = 'SORT_POSTS';
 
 
 export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
@@ -35,15 +35,18 @@ export function vote(postId, option) {
         ],
         callAPI: () => votePost(postId, option),
         schema: arrayOfPosts,
-        payload: {postId, option}
+        payload: {
+            id: postId,
+            option
+        }
     }
 }
 
 export function sortBy(property) {
     return (dispatch) => {
         dispatch({
-            type: SORT,
-            sort: property
+            type: SORT_POSTS,
+            property
         })
     }
 

@@ -3,6 +3,7 @@ import {routerReducer} from 'react-router-redux'
 import {posts} from './posts';
 import {categories, selectedCategory} from './categories'
 import {comments} from "./comments";
+import {votes} from "./votes";
 
 export function createReducer(initialState, handlers) {
     return function reducer(state = initialState, action) {
@@ -17,6 +18,7 @@ export function createReducer(initialState, handlers) {
 export default combineReducers({
     routing: routerReducer,
     posts,
+    votes,
     categories,
     selectedCategory,
     comments
