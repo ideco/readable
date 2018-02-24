@@ -6,7 +6,7 @@ import {loadPosts, vote} from '../actions/posts';
 import PostPreview from "./PostPreview";
 import {getPosts} from "../selectors";
 
-class PostList extends Component {
+class Posts extends Component {
 
     componentDidMount() {
         let params = this.props.match.params;
@@ -25,7 +25,9 @@ class PostList extends Component {
             <div>
                 <Card.Group>
                     {posts.map((post) =>
-                        <PostPreview key={post.id} post={post} upVote={(postId) => votePost(postId, 'upVote')}
+                        <PostPreview key={post.id}
+                                     post={post}
+                                     upVote={(postId) => votePost(postId, 'upVote')}
                                      downVote={(postId) => votePost(postId, 'downVote')}/>
                     )}
                 </Card.Group>
@@ -48,6 +50,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-PostList.propTypes = {};
+Posts.propTypes = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
