@@ -3,16 +3,15 @@ import {connect} from 'react-redux';
 import {Form} from 'formsy-semantic-ui-react'
 import {Label} from 'semantic-ui-react';
 import {getCategories} from "../selectors";
+import {addPost} from "../actions/posts";
 
 class PostForm extends Component {
-    onValidSubmit = (formData) => alert(JSON.stringify(formData));   // eslint-disable-line
-
     render() {
-        const {categories} = this.props;
+        const {categories, addPost} = this.props;
         return (
             <Form
                 ref={ref => this.form = ref}
-                onValidSubmit={this.onValidSubmit}
+                onValidSubmit={data => addPost(data)}
             >
                 <Form.Input
                     required
@@ -64,12 +63,13 @@ class PostForm extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
+const mapStateToProps = (state) => ({
         categories: getCategories(state)
-    };
-}
+    }
+);
 
-export default connect(
-    mapStateToProps,
-)(PostForm);
+const mapDispatchToProps = (dispatch) => ({
+    addPost: (data) => dispatch(addPost(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

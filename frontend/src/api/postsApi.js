@@ -1,6 +1,6 @@
+import {v4} from 'uuid';
 import {baseFetch} from "./index";
 import {ensureIsArray, extractVoteScore} from "./resultMappers";
-
 
 export const fetchPosts = (category, postId) => (
     baseFetch()(getFetchPath(category, postId))
@@ -11,6 +11,16 @@ export const fetchPosts = (category, postId) => (
 
 export const votePost = (postId, option) => (
     baseFetch('POST', JSON.stringify({option}))('posts', postId)
+        .then(ensureIsArray)
+        .then(extractVoteScore('post'))
+);
+
+export const createPost = (data) => (
+    baseFetch('POST', JSON.stringify({
+        id: v4(),
+        timestamp: Date.now(),
+        ...data
+    }))('posts')
         .then(ensureIsArray)
         .then(extractVoteScore('post'))
 );

@@ -1,7 +1,6 @@
-import {fetchPosts, votePost} from "../api/postsApi";
+import {createPost, fetchPosts, votePost} from "../api/postsApi";
 import {arrayOfPosts} from "../store/schema";
 
-export const LOAD_POSTS = 'LOAD_POSTS';
 export const SORT_POSTS = 'SORT_POSTS';
 
 
@@ -41,6 +40,24 @@ export function vote(postId, option) {
         }
     }
 }
+
+export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
+export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
+export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
+
+export function addPost(data) {
+    return {
+        types: [
+            ADD_POST_REQUEST,
+            ADD_POST_SUCCESS,
+            ADD_POST_FAILURE
+        ],
+        callAPI: () => createPost(data),
+        schema: arrayOfPosts,
+        payload: {}
+    }
+}
+
 
 export function sortBy(property) {
     return (dispatch) => {
