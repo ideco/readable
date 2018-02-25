@@ -36,7 +36,7 @@ class AppMenu extends Component {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Menu.Item>
-                        <Button primary>Create Post</Button>
+                        <Button primary as={Link} to="/posts/new">Create Post</Button>
                     </Menu.Item>
                 </Menu.Menu>
 
