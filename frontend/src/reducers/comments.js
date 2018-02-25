@@ -1,32 +1,36 @@
-import {LOAD_COMMENTS_REQUEST, LOAD_COMMENTS_SUCCESS, VOTE_COMMENT} from "../actions/comments";
+import {LOAD_COMMENTS_FAILURE, LOAD_COMMENTS_REQUEST, LOAD_COMMENTS_SUCCESS} from "../actions/comments";
+import {createReducer} from "./index";
 
-const commentsDefaultState = {
-    isLoading: true,
-    comments: [],
+
+const commentsInitialState = {
+    commentsLoading: true,
+    byId: {},
+    error: null
 };
 
-export function comments(state = commentsDefaultState, action) {
-    switch (action.type) {
-        case LOAD_COMMENTS_REQUEST:
-            return {
-                ...state,
-                isLoading: true
-            };
-        case LOAD_COMMENTS_SUCCESS:
-            return {
-                comments: action.response,
-                isLoading: false
-            };
-        case VOTE_COMMENT:
-            return {
-                comments: state.comments.map((comment) => {
-                    if (comment.id === action.comment.id) {
-                        return action.comment;
-                    }
-                    return comment;
-                })
-            };
-        default:
-            return state;
-    }
-}
+export const comments = createReducer(commentsInitialState, {
+    [LOAD_COMMENTS_REQUEST](state, action) {
+        console.log(action);
+        return {
+            ...state,
+            commentsLoading: true,
+            error: null,
+        };
+    },
+    [LOAD_COMMENTS_SUCCESS](state, action) {
+        console.log(action);
+        return {
+            byId: action.response.entities.comments,
+            commentsLoading: false,
+            error: null,
+        };
+    },
+    [LOAD_COMMENTS_FAILURE](state, action) {
+        console.log(action);
+        return {
+            ...state,
+            commentsLoading: false,
+            error: action.error,
+        };
+    },
+});

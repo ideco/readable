@@ -3,6 +3,9 @@ import _ from 'lodash'
 
 const getPostsById = (state) => state.posts.byId;
 const getSortProperty = (state) => state.posts.sort;
+
+const getCommentsById = (state) => state.comments.byId;
+
 const getVotes = (state) => state.votes.byId;
 const getVote = (state, id) => state.votes.byId[id];
 
@@ -16,11 +19,18 @@ export const getPosts = createSelector(
     }
 );
 
+export const getComments = createSelector(
+    [getCommentsById],
+    (commentsById) => {
+        return _.values(commentsById)
+    }
+);
+
 export const makeGetVote = () => {
     return createSelector(
         [getVote],
-        (votes) => {
-            return votes;
+        (vote) => {
+            return vote;
         }
     );
 };

@@ -6,4 +6,9 @@ export const post = new schema.Entity('posts', {
     }
 );
 
+export const comment = new schema.Entity('comments', {
+    voteScore: voteScore
+});
+
 export const arrayOfPosts = new schema.Array(post);
+export const arrayOfComments = new schema.Array(comment);

@@ -3,6 +3,7 @@ import {Comment, Header, Icon} from 'semantic-ui-react'
 import PostComment from "./PostComment";
 import {loadComments, vote} from "../actions/comments";
 import {connect} from "react-redux";
+import {getComments} from "../selectors";
 
 class Comments extends Component {
 
@@ -30,8 +31,8 @@ class Comments extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading: state.comments.isLoading,
-        comments: state.comments.comments,
+        loading: state.comments.commentsLoading,
+        comments: getComments(state),
     }
 };
 

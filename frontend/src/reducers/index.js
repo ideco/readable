@@ -19,6 +19,6 @@ export default combineReducers({
     routing: routerReducer,
     posts,
     votes,
+    comments,
     categories,
-    comments
 });
