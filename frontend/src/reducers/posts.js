@@ -1,4 +1,6 @@
 import {
+    ADD_POST_REQUEST,
+    ADD_POST_SUCCESS,
     LOAD_POSTS_FAILURE,
     LOAD_POSTS_REQUEST,
     LOAD_POSTS_SUCCESS,
@@ -9,6 +11,8 @@ import {createReducer} from "./index";
 
 const postsInitialState = {
     postsLoading: true,
+    addingPost: false,
+    lastAddedId: null,
     byId: {},
     sort: 'timestamp',
     error: null
@@ -27,6 +31,7 @@ export const posts = createReducer(postsInitialState, {
         return {
             ...state,
             byId: action.response.entities.posts,
+            lastAddedId: null,
             postsLoading: false,
             error: null
         };
@@ -46,8 +51,24 @@ export const posts = createReducer(postsInitialState, {
             byId: {
                 ...state.byId,
                 [action.id]: action.response.entities.posts[action.id]
-            }
+            },
+            lastAddedId: null
         };
+    },
+    [ADD_POST_REQUEST](state, action) {
+        return {
+            ...state,
+            addingPost: true,
+            lastAddedId: null
+        }
+    },
+    [ADD_POST_SUCCESS](state, action) {
+        return {
+            ...state,
+            byId: action.response.entities.posts,
+            lastAddedId: action.response.result[0],
+            addingPost: false,
+        }
     },
     [SORT_POSTS](state, action) {
         return {

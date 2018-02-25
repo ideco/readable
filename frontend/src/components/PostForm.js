@@ -1,18 +1,31 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Form} from 'formsy-semantic-ui-react'
-import {Label} from 'semantic-ui-react';
-import {getCategories} from "../selectors";
+import {Label, Message} from 'semantic-ui-react';
+import {getCategories, getLastAddedPost, isAddingPost} from "../selectors";
 import {addPost} from "../actions/posts";
+import {Redirect} from "react-router";
 
 class PostForm extends Component {
     render() {
-        const {categories, addPost} = this.props;
+        const {categories, isAdding, lastAdded, addPost} = this.props;
+        const success = !isAdding && lastAdded;
+        if (success) {
+            return (
+                <Redirect to={`/${lastAdded.category}/${lastAdded.id}`}/>
+            )
+        }
         return (
             <Form
+                loading={isAdding}
                 ref={ref => this.form = ref}
                 onValidSubmit={data => addPost(data)}
             >
+                <Message
+                    success
+                    header='Post added'
+                    content="You will be redirected shortly."
+                />
                 <Form.Input
                     required
                     name='title'
@@ -64,7 +77,9 @@ class PostForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-        categories: getCategories(state)
+        categories: getCategories(state),
+        isAdding: isAddingPost(state),
+        lastAdded: getLastAddedPost(state)
     }
 );
 
