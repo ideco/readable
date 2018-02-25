@@ -8,14 +8,14 @@ class PostForm extends Component {
         const {categories} = this.props;
         return (
             <Form>
-                <Form.Field id='form-input-control-title' control={Input} label='Title'
-                            placeholder='Title'/>
-                <Form.Field id='form-textarea-control-opinion' control={TextArea} label='Opinion'
+                <Form.Field id='title' control={Input} label='Title'
+                            placeholder='Title' onChange={(e) => this.handleUserInput(e)}/>
+                <Form.Field id='content' control={TextArea} label='Content'
                             placeholder='Content'/>
                 <Form.Group widths='equal'>
-                    <Form.Field id='form-input-control-username' control={Input} label='Username'
+                    <Form.Field id='username' control={Input} label='Username'
                                 placeholder='Username'/>
-                    <Form.Field id='form-input-control-category' control={Select} label='Category'
+                    <Form.Field id='category' control={Select} label='Category'
                                 options={categories.map((category) => ({
                                     key: category.path,
                                     text: category.name,
