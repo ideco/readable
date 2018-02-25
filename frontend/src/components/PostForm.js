@@ -26,7 +26,7 @@ class PostForm extends Component {
                 />
                 <Form.TextArea
                     required
-                    name='content'
+                    name='body'
                     label='Content'
                     placeholder='Content'
                     errorLabel={<Label color="red" pointing/>}
@@ -37,7 +37,7 @@ class PostForm extends Component {
                 <Form.Group widths='equal'>
                     <Form.Input
                         required
-                        name='username'
+                        name='author'
                         label='Username'
                         placeholder='Username'
                         validations='isAlphanumeric'
