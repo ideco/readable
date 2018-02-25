@@ -1,21 +1,27 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button, Form, Input, TextArea} from 'semantic-ui-react'
+import {Button, Form, Input, Select, TextArea} from 'semantic-ui-react'
+
+const categories = [
+    {key: 'react', text: 'React', value: 'react'},
+    {key: 'redux', text: 'Redux', value: 'redux'},
+];
 
 class PostForm extends Component {
     render() {
         return (
             <Form>
-                <Form.Group widths='equal'>
-                    <Form.Field id='form-input-control-first-name' control={Input} label='First name'
-                                placeholder='First name'/>
-                    <Form.Field id='form-input-control-last-name' control={Input} label='Last name'
-                                placeholder='Last name'/>
-                </Form.Group>
+                <Form.Field id='form-input-control-title' control={Input} label='Title'
+                            placeholder='Title'/>
                 <Form.Field id='form-textarea-control-opinion' control={TextArea} label='Opinion'
-                            placeholder='Opinion'/>
-                <Form.Field id='form-button-control-public' control={Button} content='Confirm'
-                            label='Label with htmlFor'/>
+                            placeholder='Content'/>
+                <Form.Group widths='equal'>
+                    <Form.Field id='form-input-control-username' control={Input} label='Username'
+                                placeholder='Username'/>
+                    <Form.Field id='form-input-control-category' control={Select} label='Category' options={categories}
+                                placeholder='Category'/>
+                </Form.Group>
+                <Form.Field id='form-button-control-public' control={Button} content='Submit'/>
             </Form>
         );
     }
