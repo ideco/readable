@@ -14,8 +14,10 @@ class Posts extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.category !== nextProps.category) {
-            nextProps.loadPosts(nextProps.match.params.category)
+        let category = nextProps.match.params.category;
+        let postId = nextProps.match.params.postId;
+        if (this.props.postId !== postId || this.props.category !== nextProps.category) {
+            nextProps.loadPosts(category, postId)
         }
     }
 
@@ -39,6 +41,7 @@ class Posts extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         posts: getPosts(state),
+        postId: ownProps.match.params.postId,
         category: ownProps.match.params.category,
     }
 };
