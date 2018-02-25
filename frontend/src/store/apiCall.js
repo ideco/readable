@@ -37,6 +37,7 @@ export function apiCall({dispatch, getState}) {
 
         return callAPI()
             .then((response) => {
+                console.log(response);
                 // sleep(2000);
                 return response;
             })

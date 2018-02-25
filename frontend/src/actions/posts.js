@@ -1,4 +1,4 @@
-import {fetchPosts, votePost} from "../utils/postsApi";
+import {fetchPosts, votePost} from "../api/postsApi";
 import {arrayOfPosts} from "../store/schema";
 
 export const LOAD_POSTS = 'LOAD_POSTS';

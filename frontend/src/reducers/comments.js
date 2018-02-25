@@ -1,4 +1,4 @@
-import {COMMENTS_LOADING, LOAD_COMMENTS, VOTE_COMMENT} from "../actions/comments";
+import {LOAD_COMMENTS_REQUEST, LOAD_COMMENTS_SUCCESS, VOTE_COMMENT} from "../actions/comments";
 
 const commentsDefaultState = {
     isLoading: true,
@@ -7,14 +7,14 @@ const commentsDefaultState = {
 
 export function comments(state = commentsDefaultState, action) {
     switch (action.type) {
-        case COMMENTS_LOADING:
+        case LOAD_COMMENTS_REQUEST:
             return {
                 ...state,
                 isLoading: true
             };
-        case LOAD_COMMENTS:
+        case LOAD_COMMENTS_SUCCESS:
             return {
-                comments: action.comments,
+                comments: action.response,
                 isLoading: false
             };
         case VOTE_COMMENT:

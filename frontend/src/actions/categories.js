@@ -1,4 +1,4 @@
-import {fetchCategories} from '../utils/serverApi'
+import {fetchCategories} from '../api/categoriesApi'
 
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
 
