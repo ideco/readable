@@ -1,23 +1,16 @@
 import React from 'react'
-import {Button, Comment, Grid, Icon} from 'semantic-ui-react'
+import {Comment, Grid, Icon} from 'semantic-ui-react'
+import Vote from "./Vote";
 
 const PostComment = props => {
-    const {comment} = props;
+    const {comment, upVote, downVote} = props;
     return (
         <Comment>
             <Comment.Content>
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={3}>
-                            <Button.Group>
-                                <Button icon basic onClick={props.upVote}>
-                                    <Icon link name='chevron circle up' color='green'/>
-                                </Button>
-                                <Button.Or text={comment.voteScore}/>
-                                <Button icon basic onClick={props.downVote}>
-                                    <Icon link name='chevron circle down' color='red'/>
-                                </Button>
-                            </Button.Group>
+                            <Vote id={comment.id} upVote={upVote} downVote={downVote}/>
                         </Grid.Column>
                         <Grid.Column width={13}>
                             <Comment.Author as='a'>{comment.author}</Comment.Author>

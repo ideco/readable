@@ -21,18 +21,22 @@ export function loadComments(postId) {
     }
 }
 
+export const VOTE_COMMENT_REQUEST = 'VOTE_COMMENT_REQUEST';
+export const VOTE_COMMENT_SUCCESS = 'VOTE_COMMENT_SUCCESS';
+export const VOTE_COMMENT_FAILURE = 'VOTE_COMMENT_FAILURE';
 export function vote(commentId, option) {
-    return (dispatch) => {
-        dispatch({
-            type: COMMENT_VOTING
-        });
-        return voteComment(commentId, option)
-            .then(comment => {
-                return comment;
-            })
-            .then((comment) => dispatch({
-                type: VOTE_COMMENT,
-                comment
-            }))
+    return {
+        types: [
+            VOTE_COMMENT_REQUEST,
+            VOTE_COMMENT_SUCCESS,
+            VOTE_COMMENT_FAILURE
+        ],
+        schema: arrayOfComments,
+        callAPI: () => voteComment(commentId, option),
+        payload: {
+            id: commentId,
+            voteType: 'comment',
+            option
+        },
     }
 }

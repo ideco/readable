@@ -36,6 +36,7 @@ export function vote(postId, option) {
         schema: arrayOfPosts,
         payload: {
             id: postId,
+            voteType: 'post',
             option
         }
     }

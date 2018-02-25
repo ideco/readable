@@ -5,14 +5,14 @@ import {ensureIsArray, extractVoteScore} from "./resultMappers";
 export const fetchPosts = (category, postId) => (
     baseFetch()(getFetchPath(category, postId))
         .then(ensureIsArray)
-        .then(extractVoteScore)
+        .then(extractVoteScore('post'))
         .then(ensurePostsMatchCategory(category))
 );
 
 export const votePost = (postId, option) => (
     baseFetch('POST', JSON.stringify({option}))('posts', postId)
         .then(ensureIsArray)
-        .then(extractVoteScore)
+        .then(extractVoteScore('post'))
 );
 
 const getFetchPath = (category, postId) => (
