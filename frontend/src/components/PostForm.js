@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Form, Input, Select, TextArea} from 'semantic-ui-react'
-
-const categories = [
-    {key: 'react', text: 'React', value: 'react'},
-    {key: 'redux', text: 'Redux', value: 'redux'},
-];
+import {getCategories} from "../selectors";
 
 class PostForm extends Component {
     render() {
+        const {categories} = this.props;
         return (
             <Form>
                 <Form.Field id='form-input-control-title' control={Input} label='Title'
@@ -18,7 +15,12 @@ class PostForm extends Component {
                 <Form.Group widths='equal'>
                     <Form.Field id='form-input-control-username' control={Input} label='Username'
                                 placeholder='Username'/>
-                    <Form.Field id='form-input-control-category' control={Select} label='Category' options={categories}
+                    <Form.Field id='form-input-control-category' control={Select} label='Category'
+                                options={categories.map((category) => ({
+                                    key: category.path,
+                                    text: category.name,
+                                    value: category.name
+                                }))}
                                 placeholder='Category'/>
                 </Form.Group>
                 <Form.Field id='form-button-control-public' control={Button} content='Submit'/>
@@ -28,7 +30,9 @@ class PostForm extends Component {
 }
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        categories: getCategories(state)
+    };
 }
 
 export default connect(

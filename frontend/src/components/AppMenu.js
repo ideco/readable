@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {loadCategories} from "../actions/categories";
 import {connect} from "react-redux";
 import {sortBy} from "../actions/posts";
+import {getCategories} from "../selectors";
 
 
 class AppMenu extends Component {
@@ -47,7 +48,7 @@ class AppMenu extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        categories: state.categories,
+        categories: getCategories(state),
         selectedCategory: ownProps.match.params.category
     }
 };

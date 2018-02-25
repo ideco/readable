@@ -9,6 +9,8 @@ const getCommentsById = (state) => state.comments.byId;
 const getVotes = (state) => state.votes.byId;
 const getVote = (state, id) => state.votes.byId[id];
 
+const getAllCategories = (state) => state.categories;
+
 export const getPosts = createSelector(
     [getPostsById, getVotes, getSortProperty],
     (postsById, votes, sortProperty) => {
@@ -34,3 +36,8 @@ export const makeGetVote = () => {
         }
     );
 };
+
+export const getCategories = createSelector(
+    [getAllCategories],
+    (categories) => (categories)
+);
