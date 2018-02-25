@@ -1,29 +1,64 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button, Form, Input, Select, TextArea} from 'semantic-ui-react'
+import {Form} from 'formsy-semantic-ui-react'
+import {Label} from 'semantic-ui-react';
 import {getCategories} from "../selectors";
 
 class PostForm extends Component {
+    onValidSubmit = (formData) => alert(JSON.stringify(formData));   // eslint-disable-line
+
     render() {
         const {categories} = this.props;
         return (
-            <Form>
-                <Form.Field id='title' control={Input} label='Title'
-                            placeholder='Title' onChange={(e) => this.handleUserInput(e)}/>
-                <Form.Field id='content' control={TextArea} label='Content'
-                            placeholder='Content'/>
+            <Form
+                ref={ref => this.form = ref}
+                onValidSubmit={this.onValidSubmit}
+            >
+                <Form.Input
+                    required
+                    name='title'
+                    label='Title'
+                    placeholder='Title'
+                    errorLabel={<Label color="red" pointing/>}
+                    validationErrors={{
+                        isDefaultRequiredValue: 'Title is mandatory',
+                    }}
+                />
+                <Form.TextArea
+                    required
+                    name='content'
+                    label='Content'
+                    placeholder='Content'
+                    errorLabel={<Label color="red" pointing/>}
+                    validationErrors={{
+                        isDefaultRequiredValue: 'Content is mandatory',
+                    }}
+                />
                 <Form.Group widths='equal'>
-                    <Form.Field id='username' control={Input} label='Username'
-                                placeholder='Username'/>
-                    <Form.Field id='category' control={Select} label='Category'
-                                options={categories.map((category) => ({
-                                    key: category.path,
-                                    text: category.name,
-                                    value: category.name
-                                }))}
-                                placeholder='Category'/>
+                    <Form.Input
+                        required
+                        name='username'
+                        label='Username'
+                        placeholder='Username'
+                        validations='isAlphanumeric'
+                        errorLabel={<Label color="red" pointing/>}
+                        validationErrors={{
+                            isDefaultRequiredValue: 'Username is mandatory',
+                            isAlphanumeric: 'Username must not contain spaces or special characters',
+                        }}
+                    />
+                    <Form.Select
+                        required
+                        name='category'
+                        label='Category'
+                        options={categories.map((category) => ({
+                            key: category.path,
+                            text: category.name,
+                            value: category.name
+                        }))}
+                        placeholder='Category'/>
                 </Form.Group>
-                <Form.Field id='form-button-control-public' control={Button} content='Submit'/>
+                <Form.Button name='form-button-control-public' content='Submit'/>
             </Form>
         );
     }
