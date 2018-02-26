@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card} from 'semantic-ui-react'
+import {Card, Loader} from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import {loadPosts, vote} from '../actions/posts';
 
@@ -22,9 +22,14 @@ class Posts extends Component {
     }
 
     render() {
-        const {posts, votePost} = this.props;
+        const {posts, votePost, loading} = this.props;
+        if (loading) {
+            return (
+                <Loader active inline='centered'/>
+            )
+        }
+
         return (
-            <div>
                 <Card.Group>
                     {posts.map((post) =>
                         <PostPreview key={post.id}
@@ -33,7 +38,6 @@ class Posts extends Component {
                                      downVote={(postId) => votePost(postId, 'downVote')}/>
                     )}
                 </Card.Group>
-            </div>
         );
     }
 }
@@ -41,6 +45,7 @@ class Posts extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         posts: getPosts(state),
+        loading: state.posts.postsLoading,
         postId: ownProps.match.params.postId,
         category: ownProps.match.params.category,
     }

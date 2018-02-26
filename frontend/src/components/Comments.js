@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Comment, Header, Icon} from 'semantic-ui-react'
+import {Comment, Header, Segment} from 'semantic-ui-react'
 import PostComment from "./PostComment";
 import {loadComments, vote} from "../actions/comments";
 import {connect} from "react-redux";
@@ -13,16 +13,25 @@ class Comments extends Component {
 
     render() {
         const {comments, loading, vote} = this.props;
+
+        if (loading) {
+            return (
+                <div></div>
+            )
+        }
+
         return (
             <Comment.Group threaded>
                 <Header as='h3' dividing>Comments</Header>
-                {!loading ? (
+                {comments.length > 0 ? (
                     comments.map((comment) =>
                         <PostComment key={comment.id} comment={comment}
                                      upVote={() => vote(comment.id, 'upVote')}
                                      downVote={() => vote(comment.id, 'downVote')}/>)
                 ) : (
-                    <Icon name='spinner' loading={true}/>
+                    <Segment>
+                        No comments yet. Feel free to start the discussion.
+                    </Segment>
                 )}
             </Comment.Group>
         )
