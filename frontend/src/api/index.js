@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 export const BASE_URL = 'http://localhost:3001';
 
-const createUrl = (...path) => _.join(_.flattenDeep(path), '/');
+const createUrl = (...path) => _.join(_.flattenDeep(_.without(path, null, undefined)), '/');
 
 const headers = {
     'Authorization': 'whatever-you-want',

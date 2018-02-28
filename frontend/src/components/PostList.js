@@ -10,14 +10,13 @@ class PostList extends Component {
 
     componentDidMount() {
         let params = this.props.match.params;
-        this.props.loadPosts(params.category, params.postId)
+        this.props.loadPosts(params.category)
     }
 
     componentWillReceiveProps(nextProps) {
         let category = nextProps.match.params.category;
-        let postId = nextProps.match.params.postId;
-        if (this.props.postId !== postId || this.props.category !== nextProps.category) {
-            nextProps.loadPosts(category, postId)
+        if (this.props.category !== nextProps.category) {
+            nextProps.loadPosts(category)
         }
     }
 
@@ -44,14 +43,13 @@ const mapStateToProps = (state, ownProps) => {
     return {
         posts: getPosts(state),
         loading: arePostsLoading(state),
-        postId: ownProps.match.params.postId,
         category: ownProps.match.params.category,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: (category, postId) => dispatch(loadPosts(category, postId))
+        loadPosts: (category) => dispatch(loadPosts(category))
     }
 };
 

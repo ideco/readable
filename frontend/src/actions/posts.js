@@ -8,16 +8,16 @@ export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
 export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
 export const LOAD_POSTS_FAILURE = 'LOAD_POSTS_FAILURE';
 
-export function loadPosts(category, postId) {
+export function loadPosts(category) {
     return {
         types: [
             LOAD_POSTS_REQUEST,
             LOAD_POSTS_SUCCESS,
             LOAD_POSTS_FAILURE
         ],
-        callAPI: () => fetchPosts(category, postId),
+        callAPI: () => fetchPosts(category),
         schema: arrayOfPosts,
-        payload: {category, postId},
+        payload: {category},
     }
 }
 
