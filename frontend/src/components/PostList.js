@@ -6,7 +6,7 @@ import {loadPosts, vote} from '../actions/posts';
 import PostPreview from "./PostPreview";
 import {getPosts} from "../selectors";
 
-class Posts extends Component {
+class PostList extends Component {
 
     componentDidMount() {
         let params = this.props.match.params;
@@ -58,6 +58,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-Posts.propTypes = {};
+PostList.propTypes = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(PostList);

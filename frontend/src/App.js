@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {Route, Switch} from "react-router-dom"
-import PostList from "./components/Posts";
+import PostList from "./components/PostList";
 import AppMenu from "./components/AppMenu";
 import Footer from "./components/Footer";
 import Comments from "./components/Comments";
