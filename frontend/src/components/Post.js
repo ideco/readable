@@ -11,7 +11,9 @@ class Post extends Component {
         return (
             <Card fluid raised>
                 <Card.Content>
-                    <Card.Header as={Link} to={`/${post.category}/${post.id}`}>{post.title}</Card.Header>
+                    <Card.Header as={Link} to={`/${post.category}/${post.id}`}>
+                        {post.title}
+                    </Card.Header>
                     <Card.Meta>Submitted by <em>{post.author}</em> to
                         <Link to={`/${post.category}`}> {post.category} </Link>
                         on {new Date(post.timestamp).toLocaleString()}
@@ -29,8 +31,7 @@ class Post extends Component {
                             </Grid.Column>
                             <Grid.Column textAlign='right'>
                                 <Button icon as={Link} to={`/${post.category}/${post.id}/edit`}>
-                                    <Icon link
-                                          name='edit'/></Button>
+                                    <Icon link name='edit'/></Button>
                                 <Button icon><Icon link name='delete'/></Button>
                             </Grid.Column>
                         </Grid.Row>
