@@ -1,25 +1,15 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import {Form} from 'formsy-semantic-ui-react'
 import {Label, Message} from 'semantic-ui-react';
-import {getCategories, getLastAddedPost, isAddingPost} from "../selectors";
-import {addPost} from "../actions/posts";
-import {Redirect} from "react-router";
 
 class PostForm extends Component {
     render() {
-        const {categories, isAdding, lastAdded, addPost} = this.props;
-        const success = !isAdding && lastAdded;
-        if (success) {
-            return (
-                <Redirect to={`/${lastAdded.category}/${lastAdded.id}`}/>
-            )
-        }
+        const {categories, isLoading, submit} = this.props;
         return (
             <Form
-                loading={isAdding}
+                loading={isLoading}
                 ref={ref => this.form = ref}
-                onValidSubmit={data => addPost(data)}
+                onValidSubmit={data => submit(data)}
             >
                 <Message
                     success
@@ -76,15 +66,4 @@ class PostForm extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-        categories: getCategories(state),
-        isAdding: isAddingPost(state),
-        lastAdded: getLastAddedPost(state)
-    }
-);
-
-const mapDispatchToProps = (dispatch) => ({
-    addPost: (data) => dispatch(addPost(data))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
+export default PostForm;

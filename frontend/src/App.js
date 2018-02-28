@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Comments from "./components/Comments";
 import {Container} from "semantic-ui-react";
 import PostForm from "./components/PostForm";
+import PostNew from "./components/PostNew";
 
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
                 <Route path="/:category?" component={AppMenu}/>
                 <Container text>
                     <Switch>
-                        <Route exact path="/posts/new" component={PostForm}/>
+                        <Route exact path="/posts/new" component={PostNew}/>
                         <Route exact path="/:category?/:postId?" children={({match}) => (
                             <div>
                                 {match && <PostList match={match}/>}
