@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {loadPosts} from '../actions/posts';
 
 import PostPreview from "./Post";
-import {getPosts} from "../selectors";
+import {arePostsLoading, getPosts} from "../selectors";
 
 class PostList extends Component {
 
@@ -43,7 +43,7 @@ class PostList extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         posts: getPosts(state),
-        loading: state.posts.postsLoading,
+        loading: arePostsLoading(state),
         postId: ownProps.match.params.postId,
         category: ownProps.match.params.category,
     }

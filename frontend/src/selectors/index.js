@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 const getPostsById = (state) => state.posts.byId;
 const getSinglePost = (state, id) => state.posts.byId[id];
+const getPostsLoading = (state) => state.posts.postsLoadin;
 const getSortProperty = (state) => state.posts.sort;
 const getLastUpdatedId = (state) => state.posts.lastUpdatedId;
 const getAddingPost = (state) => state.posts.postUpdating;
@@ -50,6 +51,11 @@ export const getLastUpdatedPost = createSelector(
     (lastUpdatedId, postsById) => (
         postsById[lastUpdatedId]
     )
+);
+
+export const arePostsLoading = createSelector(
+    [getPostsLoading],
+    (postsLoading) => postsLoading
 );
 
 export const isAddingPost = createSelector(
