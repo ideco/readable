@@ -1,5 +1,6 @@
 import {createPost, fetchPosts, fetchSinglePost, putPost, votePost} from "../api/postsApi";
 import {arrayOfPosts} from "../store/schema";
+import {v4} from 'uuid';
 
 export const SORT_POSTS = 'SORT_POSTS';
 
@@ -59,6 +60,20 @@ export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST';
 export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS';
 export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE';
 
+export function addPost(data) {
+    let postId = v4();
+    return {
+        types: [
+            UPDATE_POST_REQUEST,
+            UPDATE_POST_SUCCESS,
+            UPDATE_POST_FAILURE
+        ],
+        callAPI: () => createPost(postId, data),
+        schema: arrayOfPosts,
+        payload: {postId}
+    }
+}
+
 export function editPost(postId, data) {
     return {
         types: [
@@ -69,19 +84,6 @@ export function editPost(postId, data) {
         callAPI: () => putPost(postId, data.title, data.body),
         schema: arrayOfPosts,
         payload: {postId}
-    }
-}
-
-export function addPost(data) {
-    return {
-        types: [
-            UPDATE_POST_REQUEST,
-            UPDATE_POST_SUCCESS,
-            UPDATE_POST_FAILURE
-        ],
-        callAPI: () => createPost(data),
-        schema: arrayOfPosts,
-        payload: {}
     }
 }
 

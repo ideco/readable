@@ -1,4 +1,3 @@
-import {v4} from 'uuid';
 import {baseFetch} from "./index";
 import {ensureIsArray, extractVoteScore} from "./resultMappers";
 
@@ -32,9 +31,9 @@ export const putPost = (postId, title, body) => (
         .then(extractVoteScore('post'))
 );
 
-export const createPost = (data) => (
+export const createPost = (postId, data) => (
     baseFetch('POST', JSON.stringify({
-        id: v4(),
+        id: postId,
         timestamp: Date.now(),
         ...data
     }))('posts')
