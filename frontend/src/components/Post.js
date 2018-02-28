@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import {Button, Card, Grid, Icon} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import Vote from "./Vote";
-import {vote} from "../actions/posts";
+import {deletePost, vote} from "../actions/posts";
 
 class Post extends Component {
     render() {
-        const {post, upVote, downVote} = this.props;
+        const {post, upVote, downVote, deletePost} = this.props;
         return (
             <Card fluid raised>
                 <Card.Content>
@@ -32,7 +32,7 @@ class Post extends Component {
                             <Grid.Column textAlign='right'>
                                 <Button icon as={Link} to={`/${post.category}/${post.id}/edit`}>
                                     <Icon link name='edit'/></Button>
-                                <Button icon><Icon link name='delete'/></Button>
+                                <Button icon onClick={() => deletePost(post.id)}><Icon link name='delete'/></Button>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
@@ -50,6 +50,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        deletePost: (postId) => dispatch(deletePost(postId)),
         upVote: (postId) => dispatch(vote(postId, 'upVote')),
         downVote: (postId) => dispatch(vote(postId, 'downVote')),
     }

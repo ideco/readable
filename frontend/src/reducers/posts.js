@@ -13,7 +13,7 @@ import {createReducer} from "./index";
 const postsInitialState = {
     postsLoading: true,
     postUpdating: false,
-    lastUpdatedId: null,
+    lastUpdate: {},
     byId: {},
     sort: 'timestamp',
     error: null
@@ -32,7 +32,7 @@ export const posts = createReducer(postsInitialState, {
         return {
             ...state,
             byId: action.response.entities.posts,
-            lastUpdatedId: null,
+            lastUpdate: {},
             postsLoading: false,
             error: null
         };
@@ -53,14 +53,14 @@ export const posts = createReducer(postsInitialState, {
                 ...state.byId,
                 [action.id]: action.response.entities.posts[action.id]
             },
-            lastUpdatedId: null
+            lastUpdate: {}
         };
     },
     [UPDATE_POST_REQUEST](state, action) {
         return {
             ...state,
             postUpdating: true,
-            lastUpdatedId: null
+            lastUpdate: {}
         }
     },
     [UPDATE_POST_SUCCESS](state, action) {
@@ -71,7 +71,9 @@ export const posts = createReducer(postsInitialState, {
                 ...state.byId,
                 [updatedPostId]: action.response.entities.posts[updatedPostId]
             },
-            lastUpdatedId: action.response.result[0],
+            lastUpdate: {
+                [action.updateType]: updatedPostId
+            },
             postUpdating: false,
         }
     },

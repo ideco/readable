@@ -5,7 +5,7 @@ const getPostsById = (state) => state.posts.byId;
 const getSinglePost = (state, id) => state.posts.byId[id];
 const getPostsLoading = (state) => state.posts.postsLoading;
 const getSortProperty = (state) => state.posts.sort;
-const getLastUpdatedId = (state) => state.posts.lastUpdatedId;
+const getLastUpdate = (state) => state.posts.lastUpdate;
 const getAddingPost = (state) => state.posts.postUpdating;
 
 const getCommentsById = (state) => state.comments.byId;
@@ -18,7 +18,9 @@ const getAllCategories = (state) => state.categories;
 export const getPosts = createSelector(
     [getPostsById, getVotes, getSortProperty],
     (postsById, votes, sortProperty) => {
-        return _.orderBy(_.values(postsById).map((post) => ({
+        return _.orderBy(_.values(postsById)
+            .filter((post) => !post.deleted)
+            .map((post) => ({
             ...post,
             voteScore: votes[post.id].voteScore
         })), sortProperty, 'desc');
@@ -46,10 +48,24 @@ export const makeGetVote = () => (
     )
 );
 
-export const getLastUpdatedPost = createSelector(
-    [getLastUpdatedId, getPostsById],
-    (lastUpdatedId, postsById) => (
-        postsById[lastUpdatedId]
+export const getAddedPost = createSelector(
+    [getLastUpdate, getPostsById],
+    (lastUpdate, postsById) => (
+        lastUpdate['ADD'] ? postsById[lastUpdate['ADD']] : undefined
+    )
+);
+
+export const getEditedPost = createSelector(
+    [getLastUpdate, getPostsById],
+    (lastUpdate, postsById) => (
+        lastUpdate['EDIT'] ? postsById[lastUpdate['EDIT']] : undefined
+    )
+);
+
+export const getDeletedPostId = createSelector(
+    [getLastUpdate],
+    (lastUpdate) => (
+        lastUpdate['DELETE'] ? lastUpdate['DELETE'] : undefined
     )
 );
 

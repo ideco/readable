@@ -41,6 +41,12 @@ export const createPost = (postId, data) => (
         .then(extractVoteScore('post'))
 );
 
+export const deletePost = (postId) => (
+    baseFetch("DELETE")('posts', postId)
+        .then(ensureIsArray)
+        .then(extractVoteScore('post'))
+);
+
 const ensurePostsMatchCategory = (category) => (
     (posts) => category ? checkEveryPostMatchesCategory(posts, category) : posts
 );

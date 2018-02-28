@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getCategories, getLastUpdatedPost, isAddingPost, makeGetPostById} from "../selectors";
+import {getCategories, getEditedPost, isAddingPost, makeGetPostById} from "../selectors";
 import {editPost, loadPosts} from "../actions/posts";
 import {Redirect} from "react-router";
 import PostForm from "./PostForm";
@@ -21,11 +21,11 @@ class PostEdit extends Component {
     }
 
     render() {
-        const {loading, categories, isAdding, lastAdded, editPost, post} = this.props;
-        const success = !isAdding && lastAdded;
+        const {loading, categories, isAdding, lastEdited, editPost, post} = this.props;
+        const success = !isAdding && lastEdited;
         if (success) {
             return (
-                <Redirect to={`/${lastAdded.category}/${lastAdded.id}`}/>
+                <Redirect to={`/${lastEdited.category}/${lastEdited.id}`}/>
             )
         }
         return (
@@ -45,7 +45,7 @@ const makeMapStateToProps = () => {
             post: getPost(state, ownProps.match.params.postId),
             categories: getCategories(state),
             isAdding: isAddingPost(state),
-            lastAdded: getLastUpdatedPost(state),
+            lastEdited: getEditedPost(state),
             loading: state.posts.postsLoading,
             postId: ownProps.match.params.postId,
             category: ownProps.match.params.category,

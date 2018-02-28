@@ -1,4 +1,4 @@
-import {createPost, fetchPosts, fetchSinglePost, putPost, votePost} from "../api/postsApi";
+import * as api from "../api/postsApi";
 import {arrayOfPosts} from "../store/schema";
 import {v4} from 'uuid';
 
@@ -16,7 +16,7 @@ export function loadPosts(category) {
             LOAD_POSTS_SUCCESS,
             LOAD_POSTS_FAILURE
         ],
-        callAPI: () => fetchPosts(category),
+        callAPI: () => api.fetchPosts(category),
         schema: arrayOfPosts,
         payload: {category},
     }
@@ -29,7 +29,7 @@ export function loadSinglePost(category, postId) {
             LOAD_POSTS_SUCCESS,
             LOAD_POSTS_FAILURE
         ],
-        callAPI: () => fetchSinglePost(category, postId),
+        callAPI: () => api.fetchSinglePost(category, postId),
         schema: arrayOfPosts,
         payload: {category, postId},
     }
@@ -46,7 +46,7 @@ export function vote(postId, option) {
             VOTE_POSTS_SUCCESS,
             VOTE_POSTS_FAILURE
         ],
-        callAPI: () => votePost(postId, option),
+        callAPI: () => api.votePost(postId, option),
         schema: arrayOfPosts,
         payload: {
             id: postId,
@@ -68,9 +68,12 @@ export function addPost(data) {
             UPDATE_POST_SUCCESS,
             UPDATE_POST_FAILURE
         ],
-        callAPI: () => createPost(postId, data),
+        callAPI: () => api.createPost(postId, data),
         schema: arrayOfPosts,
-        payload: {postId}
+        payload: {
+            postId,
+            updateType: 'ADD'
+        }
     }
 }
 
@@ -81,9 +84,28 @@ export function editPost(postId, data) {
             UPDATE_POST_SUCCESS,
             UPDATE_POST_FAILURE
         ],
-        callAPI: () => putPost(postId, data.title, data.body),
+        callAPI: () => api.putPost(postId, data.title, data.body),
         schema: arrayOfPosts,
-        payload: {postId}
+        payload: {
+            postId,
+            updateType: 'EDIT'
+        }
+    }
+}
+
+export function deletePost(postId) {
+    return {
+        types: [
+            UPDATE_POST_REQUEST,
+            UPDATE_POST_SUCCESS,
+            UPDATE_POST_FAILURE
+        ],
+        callAPI: () => api.deletePost(postId),
+        schema: arrayOfPosts,
+        payload: {
+            postId,
+            updateType: 'DELETE'
+        }
     }
 }
 

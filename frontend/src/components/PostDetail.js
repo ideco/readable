@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {arePostsLoading, makeGetPostById} from "../selectors";
+import {arePostsLoading, getDeletedPostId, makeGetPostById} from "../selectors";
 import {loadSinglePost} from "../actions/posts";
 import {Loader} from "semantic-ui-react";
 import Post from "./Post";
 import Comments from "./Comments";
+import {Redirect} from "react-router";
 
 class PostDetail extends Component {
 
@@ -22,8 +23,12 @@ class PostDetail extends Component {
     }
 
     render() {
-        console.log(this.props);
-        const {post, loading} = this.props;
+        const {post, loading, category, postId, lastDeletedId} = this.props;
+        if (postId === lastDeletedId) {
+            return (
+                <Redirect to={`/${category}/`}/>
+            )
+        }
         if (loading) {
             return (
                 <Loader active inline='centered'/>
@@ -46,6 +51,7 @@ const makeMapStateToProps = () => {
             postId: ownProps.match.params.postId,
             category: ownProps.match.params.category,
             post: getPost(state, ownProps.match.params.postId),
+            lastDeletedId: getDeletedPostId(state)
         }
     );
     return mapStateToProps;
