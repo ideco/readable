@@ -4,7 +4,7 @@ import _ from 'lodash'
 const getPostsById = (state) => state.posts.byId;
 const getSinglePost = (state, id) => state.posts.byId[id];
 const getSortProperty = (state) => state.posts.sort;
-const getLastAddedId = (state) => state.posts.lastUpdatedId;
+const getLastUpdatedId = (state) => state.posts.lastUpdatedId;
 const getAddingPost = (state) => state.posts.postUpdating;
 
 const getCommentsById = (state) => state.comments.byId;
@@ -45,10 +45,10 @@ export const makeGetVote = () => (
     )
 );
 
-export const getLastAddedPost = createSelector(
-    [getLastAddedId, getPostsById],
-    (lastAddedId, postsById) => (
-        postsById[lastAddedId]
+export const getLastUpdatedPost = createSelector(
+    [getLastUpdatedId, getPostsById],
+    (lastUpdatedId, postsById) => (
+        postsById[lastUpdatedId]
     )
 );
 

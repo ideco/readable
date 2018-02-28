@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getCategories, getLastAddedPost, isAddingPost} from "../selectors";
+import {getCategories, getLastUpdatedPost, isAddingPost} from "../selectors";
 import {addPost} from "../actions/posts";
 import {Redirect} from "react-router";
 import PostForm from "./PostForm";
@@ -28,7 +28,7 @@ class PostNew extends Component {
 const mapStateToProps = (state) => ({
         categories: getCategories(state),
         isAdding: isAddingPost(state),
-        lastAdded: getLastAddedPost(state)
+        lastAdded: getLastUpdatedPost(state)
     }
 );
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getCategories, getLastAddedPost, isAddingPost, makeGetPostById} from "../selectors";
+import {getCategories, getLastUpdatedPost, isAddingPost, makeGetPostById} from "../selectors";
 import {editPost, loadPosts} from "../actions/posts";
 import {Redirect} from "react-router";
 import PostForm from "./PostForm";
@@ -45,7 +45,7 @@ const makeMapStateToProps = () => {
             post: getPost(state, ownProps.match.params.postId),
             categories: getCategories(state),
             isAdding: isAddingPost(state),
-            lastAdded: getLastAddedPost(state),
+            lastAdded: getLastUpdatedPost(state),
             loading: state.posts.postsLoading,
             postId: ownProps.match.params.postId,
             category: ownProps.match.params.category,
