@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export const BASE_URL = 'https://reddit-clone-server-rfpeezcxpm.now.sh';
+export const BASE_URL = 'http://localhost:3001';
 
 const createUrl = (...path) => _.join(_.flattenDeep(path), '/');
 
