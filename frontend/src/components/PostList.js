@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Card, Loader} from 'semantic-ui-react'
 import {connect} from 'react-redux';
-import {loadPosts, vote} from '../actions/posts';
+import {loadPosts} from '../actions/posts';
 
 import PostPreview from "./PostPreview";
 import {getPosts} from "../selectors";
@@ -22,7 +22,7 @@ class PostList extends Component {
     }
 
     render() {
-        const {posts, votePost, loading} = this.props;
+        const {posts, loading} = this.props;
         if (loading) {
             return (
                 <Loader active inline='centered'/>
@@ -30,14 +30,12 @@ class PostList extends Component {
         }
 
         return (
-                <Card.Group>
-                    {posts.map((post) =>
-                        <PostPreview key={post.id}
-                                     post={post}
-                                     upVote={(postId) => votePost(postId, 'upVote')}
-                                     downVote={(postId) => votePost(postId, 'downVote')}/>
-                    )}
-                </Card.Group>
+            <Card.Group>
+                {posts.map((post) =>
+                    <PostPreview key={post.id}
+                                 post={post}/>
+                )}
+            </Card.Group>
         );
     }
 }
@@ -53,8 +51,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: (category, postId) => dispatch(loadPosts(category, postId)),
-        votePost: (postId, option) => dispatch(vote(postId, option)),
+        loadPosts: (category, postId) => dispatch(loadPosts(category, postId))
     }
 };
 
