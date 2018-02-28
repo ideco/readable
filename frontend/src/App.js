@@ -23,6 +23,7 @@ class App extends Component {
                                 {match && match.params.postId && <Comments match={match}/>}
                             </div>
                         )}/>
+                        <Route exact path="/:category/:postId/edit" component={PostForm}/>
                     </Switch>
                 </Container>
                 <Footer/>

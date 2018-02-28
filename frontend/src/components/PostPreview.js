@@ -25,7 +25,8 @@ const PostPreview = props => {
                             <Link to={`/${post.category}/${post.id}`}> {post.commentCount} comments</Link>
                         </Grid.Column>
                         <Grid.Column textAlign='right'>
-                            <Button icon><Icon link name='edit'/></Button>
+                            <Button icon as={Link} to={`/${post.category}/${post.id}/edit`}><Icon link
+                                                                                                  name='edit'/></Button>
                             <Button icon><Icon link name='delete'/></Button>
                         </Grid.Column>
                     </Grid.Row>
