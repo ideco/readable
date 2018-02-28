@@ -42,16 +42,16 @@ export function vote(postId, option) {
     }
 }
 
-export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
-export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
-export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
+export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST';
+export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS';
+export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE';
 
 export function editPost(postId, data) {
     return {
         types: [
-            ADD_POST_REQUEST,
-            ADD_POST_SUCCESS,
-            ADD_POST_FAILURE
+            UPDATE_POST_REQUEST,
+            UPDATE_POST_SUCCESS,
+            UPDATE_POST_FAILURE
         ],
         callAPI: () => putPost(postId, data.title, data.body),
         schema: arrayOfPosts,
@@ -62,9 +62,9 @@ export function editPost(postId, data) {
 export function addPost(data) {
     return {
         types: [
-            ADD_POST_REQUEST,
-            ADD_POST_SUCCESS,
-            ADD_POST_FAILURE
+            UPDATE_POST_REQUEST,
+            UPDATE_POST_SUCCESS,
+            UPDATE_POST_FAILURE
         ],
         callAPI: () => createPost(data),
         schema: arrayOfPosts,

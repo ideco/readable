@@ -1,6 +1,6 @@
 import {
-    ADD_POST_SUCCESS,
     LOAD_POSTS_SUCCESS,
+    UPDATE_POST_SUCCESS,
     VOTE_POSTS_FAILURE,
     VOTE_POSTS_REQUEST,
     VOTE_POSTS_SUCCESS
@@ -62,7 +62,7 @@ export const votes = createReducer(votesInitialState, {
     [LOAD_POSTS_SUCCESS](state, action) {
         return updateVotes(state, action)
     },
-    [ADD_POST_SUCCESS](state, action) {
+    [UPDATE_POST_SUCCESS](state, action) {
         return updateVotes(state, action)
     },
     [LOAD_COMMENTS_SUCCESS](state, action) {

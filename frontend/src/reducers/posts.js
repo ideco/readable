@@ -1,11 +1,11 @@
 import {
-    ADD_POST_FAILURE,
-    ADD_POST_REQUEST,
-    ADD_POST_SUCCESS,
     LOAD_POSTS_FAILURE,
     LOAD_POSTS_REQUEST,
     LOAD_POSTS_SUCCESS,
     SORT_POSTS,
+    UPDATE_POST_FAILURE,
+    UPDATE_POST_REQUEST,
+    UPDATE_POST_SUCCESS,
     VOTE_POSTS_SUCCESS
 } from '../actions/posts'
 import {createReducer} from "./index";
@@ -56,14 +56,14 @@ export const posts = createReducer(postsInitialState, {
             lastAddedId: null
         };
     },
-    [ADD_POST_REQUEST](state, action) {
+    [UPDATE_POST_REQUEST](state, action) {
         return {
             ...state,
             addingPost: true,
             lastAddedId: null
         }
     },
-    [ADD_POST_SUCCESS](state, action) {
+    [UPDATE_POST_SUCCESS](state, action) {
         return {
             ...state,
             byId: action.response.entities.posts,
@@ -71,7 +71,7 @@ export const posts = createReducer(postsInitialState, {
             addingPost: false,
         }
     },
-    [ADD_POST_FAILURE](state, action) {
+    [UPDATE_POST_FAILURE](state, action) {
         console.log(action);
         return {
             ...state,
