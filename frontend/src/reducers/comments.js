@@ -2,6 +2,9 @@ import {
     LOAD_COMMENTS_FAILURE,
     LOAD_COMMENTS_REQUEST,
     LOAD_COMMENTS_SUCCESS,
+    UPDATE_COMMENTS_FAILURE,
+    UPDATE_COMMENTS_REQUEST,
+    UPDATE_COMMENTS_SUCCESS,
     VOTE_COMMENT_SUCCESS
 } from "../actions/comments";
 import {createReducer} from "./index";
@@ -44,6 +47,25 @@ export const comments = createReducer(commentsInitialState, {
                 ...state.byId,
                 [action.id]: action.response.entities.comments[action.id]
             }
+        };
+    },
+    [UPDATE_COMMENTS_REQUEST](state, action) {
+        console.log(action);
+        return {
+            ...state,
+        };
+    },
+    [UPDATE_COMMENTS_SUCCESS](state, action) {
+        console.log(action);
+        return {
+            ...state,
+
+        };
+    },
+    [UPDATE_COMMENTS_FAILURE](state, action) {
+        console.log(action);
+        return {
+            ...state,
         };
     },
 });
