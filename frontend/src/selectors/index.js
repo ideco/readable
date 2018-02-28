@@ -4,8 +4,8 @@ import _ from 'lodash'
 const getPostsById = (state) => state.posts.byId;
 const getSinglePost = (state, id) => state.posts.byId[id];
 const getSortProperty = (state) => state.posts.sort;
-const getLastAddedId = (state) => state.posts.lastAddedId;
-const getAddingPost = (state) => state.posts.addingPost;
+const getLastAddedId = (state) => state.posts.lastUpdatedId;
+const getAddingPost = (state) => state.posts.postUpdating;
 
 const getCommentsById = (state) => state.comments.byId;
 
