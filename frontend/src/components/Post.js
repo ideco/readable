@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import Vote from "./Vote";
 import {vote} from "../actions/posts";
 
-class PostPreview extends Component {
+class Post extends Component {
     render() {
         const {post, upVote, downVote} = this.props;
         return (
@@ -54,4 +54,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostPreview);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

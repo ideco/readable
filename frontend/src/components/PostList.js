@@ -3,7 +3,7 @@ import {Card, Loader} from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import {loadPosts} from '../actions/posts';
 
-import PostPreview from "./PostPreview";
+import PostPreview from "./Post";
 import {getPosts} from "../selectors";
 
 class PostList extends Component {
