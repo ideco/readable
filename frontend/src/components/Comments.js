@@ -3,7 +3,7 @@ import {Comment, Header, Segment} from 'semantic-ui-react'
 import PostComment from "./PostComment";
 import {addComment, loadComments, vote} from "../actions/comments";
 import {connect} from "react-redux";
-import {getComments} from "../selectors";
+import {areCommentsUpdating, getComments} from "../selectors";
 import CommentForm from "./CommentForm";
 
 class Comments extends Component {
@@ -13,7 +13,7 @@ class Comments extends Component {
     }
 
     render() {
-        const {comments, loading, vote, postId, addComment} = this.props;
+        const {comments, loading, vote, postId, addComment, updating} = this.props;
 
         if (loading) {
             return (
@@ -37,7 +37,10 @@ class Comments extends Component {
                     )}
                 </Comment.Group>
                 <Header as='h4' dividing>Reply</Header>
-                <CommentForm submit={(data) => addComment(postId, data)}/>
+                <CommentForm
+                    submit={(data) => addComment(postId, data)}
+                    isLoading={updating}
+                />
             </div>
 
         )
@@ -47,6 +50,7 @@ class Comments extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         loading: state.comments.commentsLoading,
+        updating: areCommentsUpdating(state),
         comments: getComments(state),
         postId: ownProps.postId
     }

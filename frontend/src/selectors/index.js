@@ -9,6 +9,7 @@ const getLastUpdate = (state) => state.posts.lastUpdate;
 const getAddingPost = (state) => state.posts.postUpdating;
 
 const getCommentsById = (state) => state.comments.byId;
+const getCommentsUpdating = (state) => state.comments.commentsUpdating;
 
 const getVotes = (state) => state.votes.byId;
 const getVote = (state, id) => state.votes.byId[id];
@@ -39,6 +40,11 @@ export const getComments = createSelector(
     (commentsById) => {
         return _.values(commentsById)
     }
+);
+
+export const areCommentsUpdating = createSelector(
+    [getCommentsUpdating],
+    (commentsUpdating) => commentsUpdating
 );
 
 export const makeGetVote = () => (

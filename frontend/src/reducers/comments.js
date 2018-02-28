@@ -74,15 +74,17 @@ export const comments = createReducer(commentsInitialState, {
                 ...state.byId,
                 [updatedCommentId]: action.response.entities.comments[updatedCommentId]
             },
+            commentsUpdating: false,
             lastUpdate: {
                 [action.updateType]: updatedCommentId,
             }
         };
     },
     [UPDATE_COMMENTS_FAILURE](state, action) {
-        console.log(action);
         return {
             ...state,
+            error: action.error,
+            commentsUpdating: false
         };
     },
 });

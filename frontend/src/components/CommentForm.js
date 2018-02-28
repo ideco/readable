@@ -4,13 +4,20 @@ import {Label} from 'semantic-ui-react';
 
 class CommentForm extends Component {
     render() {
-        const {isLoading, submit, comment} = this.props;
+        const {isLoading, submit, comment, clear} = this.props;
         let isEdit = Boolean(comment);
+        if (clear) {
+
+        }
         return (
             <Form
                 loading={isLoading}
-                ref={ref => this.form = ref}
-                onValidSubmit={data => submit(data)}
+                ref='form'
+                reply={true}
+                onValidSubmit={data => {
+                    submit(data);
+                    this.refs.form.reset();
+                }}
             >
                 <Form.Input
                     required={!isEdit}
