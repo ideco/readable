@@ -9,6 +9,13 @@ export const fetchPosts = (category, postId) => (
         .then(ensurePostsMatchCategory(category))
 );
 
+export const fetchSinglePost = (category, postId) => (
+    baseFetch()('posts', postId)
+        .then(ensureIsArray)
+        .then(extractVoteScore('post'))
+        .then(ensurePostsMatchCategory(category))
+);
+
 export const votePost = (postId, option) => (
     baseFetch('POST', JSON.stringify({option}))('posts', postId)
         .then(ensureIsArray)

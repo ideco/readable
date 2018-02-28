@@ -1,4 +1,4 @@
-import {createPost, fetchPosts, putPost, votePost} from "../api/postsApi";
+import {createPost, fetchPosts, fetchSinglePost, putPost, votePost} from "../api/postsApi";
 import {arrayOfPosts} from "../store/schema";
 
 export const SORT_POSTS = 'SORT_POSTS';
@@ -16,6 +16,19 @@ export function loadPosts(category, postId) {
             LOAD_POSTS_FAILURE
         ],
         callAPI: () => fetchPosts(category, postId),
+        schema: arrayOfPosts,
+        payload: {category, postId},
+    }
+}
+
+export function loadSinglePost(category, postId) {
+    return {
+        types: [
+            LOAD_POSTS_REQUEST,
+            LOAD_POSTS_SUCCESS,
+            LOAD_POSTS_FAILURE
+        ],
+        callAPI: () => fetchSinglePost(category, postId),
         schema: arrayOfPosts,
         payload: {category, postId},
     }

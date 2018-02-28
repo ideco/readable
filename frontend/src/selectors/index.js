@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 const getPostsById = (state) => state.posts.byId;
 const getSinglePost = (state, id) => state.posts.byId[id];
-const getPostsLoading = (state) => state.posts.postsLoadin;
+const getPostsLoading = (state) => state.posts.postsLoading;
 const getSortProperty = (state) => state.posts.sort;
 const getLastUpdatedId = (state) => state.posts.lastUpdatedId;
 const getAddingPost = (state) => state.posts.postUpdating;

@@ -3,7 +3,7 @@ import {Card, Loader} from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import {loadPosts} from '../actions/posts';
 
-import PostPreview from "./Post";
+import Post from "./Post";
 import {arePostsLoading, getPosts} from "../selectors";
 
 class PostList extends Component {
@@ -32,8 +32,8 @@ class PostList extends Component {
         return (
             <Card.Group>
                 {posts.map((post) =>
-                    <PostPreview key={post.id}
-                                 post={post}/>
+                    <Post key={post.id}
+                          post={post}/>
                 )}
             </Card.Group>
         );

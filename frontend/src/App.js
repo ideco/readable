@@ -4,10 +4,10 @@ import {Route, Switch} from "react-router-dom"
 import PostList from "./components/PostList";
 import AppMenu from "./components/AppMenu";
 import Footer from "./components/Footer";
-import Comments from "./components/Comments";
 import {Container} from "semantic-ui-react";
 import PostNew from "./components/PostNew";
 import PostEdit from "./components/PostEdit";
+import PostDetail from "./components/PostDetail";
 
 
 class App extends Component {
@@ -18,12 +18,8 @@ class App extends Component {
                 <Container text>
                     <Switch>
                         <Route exact path="/posts/new" component={PostNew}/>
-                        <Route exact path="/:category?/:postId?" children={({match}) => (
-                            <div>
-                                {match && <PostList match={match}/>}
-                                {match && match.params.postId && <Comments match={match}/>}
-                            </div>
-                        )}/>
+                        <Route exact path="/:category?" component={PostList}/>
+                        <Route exact path="/:category/:postId" component={PostDetail}/>
                         <Route exact path="/:category/:postId/edit" component={PostEdit}/>
                     </Switch>
                 </Container>

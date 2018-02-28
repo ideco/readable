@@ -8,7 +8,7 @@ import {getComments} from "../selectors";
 class Comments extends Component {
 
     componentDidMount() {
-        this.props.loadComments(this.props.match.params.postId)
+        this.props.loadComments(this.props.postId)
     }
 
     render() {
@@ -38,10 +38,11 @@ class Comments extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         loading: state.comments.commentsLoading,
         comments: getComments(state),
+        postId: ownProps.postId
     }
 };
 
