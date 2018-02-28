@@ -64,9 +64,13 @@ export const posts = createReducer(postsInitialState, {
         }
     },
     [UPDATE_POST_SUCCESS](state, action) {
+        let updatedPostId = action.postId;
         return {
             ...state,
-            byId: action.response.entities.posts,
+            byId: {
+                ...state.byId,
+                [updatedPostId]: action.response.entities.posts[updatedPostId]
+            },
             lastUpdatedId: action.response.result[0],
             postUpdating: false,
         }
