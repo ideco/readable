@@ -15,6 +15,16 @@ export const votePost = (postId, option) => (
         .then(extractVoteScore('post'))
 );
 
+export const putPost = (postId, title, body) => (
+    baseFetch('PUT', JSON.stringify({
+            title,
+            body
+        })
+    )('posts', postId)
+        .then(ensureIsArray)
+        .then(extractVoteScore('post'))
+);
+
 export const createPost = (data) => (
     baseFetch('POST', JSON.stringify({
         id: v4(),

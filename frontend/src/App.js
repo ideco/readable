@@ -6,8 +6,8 @@ import AppMenu from "./components/AppMenu";
 import Footer from "./components/Footer";
 import Comments from "./components/Comments";
 import {Container} from "semantic-ui-react";
-import PostForm from "./components/PostForm";
 import PostNew from "./components/PostNew";
+import PostEdit from "./components/PostEdit";
 
 
 class App extends Component {
@@ -24,7 +24,7 @@ class App extends Component {
                                 {match && match.params.postId && <Comments match={match}/>}
                             </div>
                         )}/>
-                        <Route exact path="/:category/:postId/edit" component={PostForm}/>
+                        <Route exact path="/:category/:postId/edit" component={PostEdit}/>
                     </Switch>
                 </Container>
                 <Footer/>

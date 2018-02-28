@@ -1,25 +1,22 @@
 import React, {Component} from 'react';
 import {Form} from 'formsy-semantic-ui-react'
-import {Label, Message} from 'semantic-ui-react';
+import {Label} from 'semantic-ui-react';
 
 class PostForm extends Component {
     render() {
-        const {categories, isLoading, submit} = this.props;
+        const {categories, isLoading, submit, post} = this.props;
+        let isEdit = Boolean(post);
         return (
             <Form
                 loading={isLoading}
                 ref={ref => this.form = ref}
                 onValidSubmit={data => submit(data)}
             >
-                <Message
-                    success
-                    header='Post added'
-                    content="You will be redirected shortly."
-                />
                 <Form.Input
                     required
                     name='title'
                     label='Title'
+                    value={isEdit ? post.title : undefined}
                     placeholder='Title'
                     errorLabel={<Label color="red" pointing/>}
                     validationErrors={{
@@ -30,6 +27,7 @@ class PostForm extends Component {
                     required
                     name='body'
                     label='Content'
+                    value={isEdit ? post.body : undefined}
                     placeholder='Content'
                     errorLabel={<Label color="red" pointing/>}
                     validationErrors={{
@@ -38,8 +36,10 @@ class PostForm extends Component {
                 />
                 <Form.Group widths='equal'>
                     <Form.Input
-                        required
+                        required={!isEdit}
                         name='author'
+                        disabled={isEdit}
+                        value={isEdit ? post.author : undefined}
                         label='Username'
                         placeholder='Username'
                         validations='isAlphanumeric'
@@ -50,9 +50,11 @@ class PostForm extends Component {
                         }}
                     />
                     <Form.Select
-                        required
+                        required={!isEdit}
                         name='category'
                         label='Category'
+                        value={isEdit ? post.category : undefined}
+                        disabled={isEdit}
                         options={categories.map((category) => ({
                             key: category.path,
                             text: category.name,

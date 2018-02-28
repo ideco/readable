@@ -1,4 +1,5 @@
 import {
+    ADD_POST_FAILURE,
     ADD_POST_REQUEST,
     ADD_POST_SUCCESS,
     LOAD_POSTS_FAILURE,
@@ -67,6 +68,14 @@ export const posts = createReducer(postsInitialState, {
             ...state,
             byId: action.response.entities.posts,
             lastAddedId: action.response.result[0],
+            addingPost: false,
+        }
+    },
+    [ADD_POST_FAILURE](state, action) {
+        console.log(action);
+        return {
+            ...state,
+            error: action.error,
             addingPost: false,
         }
     },

@@ -1,4 +1,4 @@
-import {createPost, fetchPosts, votePost} from "../api/postsApi";
+import {createPost, fetchPosts, putPost, votePost} from "../api/postsApi";
 import {arrayOfPosts} from "../store/schema";
 
 export const SORT_POSTS = 'SORT_POSTS';
@@ -24,6 +24,7 @@ export function loadPosts(category, postId) {
 export const VOTE_POSTS_REQUEST = 'VOTE_POSTS_REQUEST';
 export const VOTE_POSTS_SUCCESS = 'VOTE_POSTS_SUCCESS';
 export const VOTE_POSTS_FAILURE = 'VOTE_POSTS_FAILURE';
+
 export function vote(postId, option) {
     return {
         types: [
@@ -44,6 +45,19 @@ export function vote(postId, option) {
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
+
+export function editPost(postId, data) {
+    return {
+        types: [
+            ADD_POST_REQUEST,
+            ADD_POST_SUCCESS,
+            ADD_POST_FAILURE
+        ],
+        callAPI: () => putPost(postId, data.title, data.body),
+        schema: arrayOfPosts,
+        payload: {postId}
+    }
+}
 
 export function addPost(data) {
     return {

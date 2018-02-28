@@ -54,16 +54,3 @@ export function apiCall({dispatch, getState}) {
             )
     }
 }
-
-function sleep(time) {
-
-    var start = new Date();
-    var now;
-
-    while (true) {
-        now = new Date();
-        if (now - start >= time) {
-            break;
-        }
-    }
-}

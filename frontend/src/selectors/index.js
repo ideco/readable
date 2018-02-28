@@ -2,6 +2,7 @@ import {createSelector} from 'reselect'
 import _ from 'lodash'
 
 const getPostsById = (state) => state.posts.byId;
+const getSinglePost = (state, id) => state.posts.byId[id];
 const getSortProperty = (state) => state.posts.sort;
 const getLastAddedId = (state) => state.posts.lastAddedId;
 const getAddingPost = (state) => state.posts.addingPost;
@@ -23,6 +24,13 @@ export const getPosts = createSelector(
     }
 );
 
+export const makeGetPostById = () => (
+    createSelector(
+        [getSinglePost],
+        (post) => post
+    )
+);
+
 export const getComments = createSelector(
     [getCommentsById],
     (commentsById) => {
@@ -30,14 +38,12 @@ export const getComments = createSelector(
     }
 );
 
-export const makeGetVote = () => {
-    return createSelector(
+export const makeGetVote = () => (
+    createSelector(
         [getVote],
-        (vote) => {
-            return vote;
-        }
-    );
-};
+        (vote) => vote
+    )
+);
 
 export const getLastAddedPost = createSelector(
     [getLastAddedId, getPostsById],
