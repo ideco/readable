@@ -7,6 +7,7 @@ import {
 } from "../actions/posts";
 import {
     LOAD_COMMENTS_SUCCESS,
+    UPDATE_COMMENTS_SUCCESS,
     VOTE_COMMENT_FAILURE,
     VOTE_COMMENT_REQUEST,
     VOTE_COMMENT_SUCCESS
@@ -64,6 +65,9 @@ export const votes = createReducer(votesInitialState, {
     },
     [UPDATE_POST_SUCCESS](state, action) {
         return updateVotes(state, action)
+    },
+    [UPDATE_COMMENTS_SUCCESS](state, action) {
+        return updateSingleVote(state, action)
     },
     [LOAD_COMMENTS_SUCCESS](state, action) {
         return updateVotes(state, action)

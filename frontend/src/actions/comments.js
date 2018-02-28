@@ -37,7 +37,11 @@ export function addComment(postId, data) {
             timestamp: Date.now(),
             ...data
         }),
-        payload: {postId, commentId}
+        payload: {
+            id: commentId,
+            postId,
+            updateType: 'ADD'
+        }
     }
 }
 

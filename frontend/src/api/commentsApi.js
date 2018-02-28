@@ -15,4 +15,6 @@ export const voteComment = (commentId, option) => (
 
 export const addComment = (postId, data) => (
     baseFetch('POST', JSON.stringify(data))('comments')
+        .then(ensureIsArray)
+        .then(extractVoteScore('comment'))
 );

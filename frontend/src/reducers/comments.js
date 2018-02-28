@@ -12,6 +12,8 @@ import {createReducer} from "./index";
 
 const commentsInitialState = {
     commentsLoading: true,
+    commentsUpdating: false,
+    lastUpdate: {},
     byId: {},
     error: null
 };
@@ -21,6 +23,8 @@ export const comments = createReducer(commentsInitialState, {
         return {
             ...state,
             commentsLoading: true,
+            commentsUpdating: false,
+            lastUpdate: {},
             error: null,
         };
     },
@@ -28,6 +32,8 @@ export const comments = createReducer(commentsInitialState, {
         return {
             byId: action.response.entities.comments,
             commentsLoading: false,
+            commentsUpdating: false,
+            lastUpdate: {},
             error: null,
         };
     },
@@ -35,6 +41,8 @@ export const comments = createReducer(commentsInitialState, {
         return {
             ...state,
             commentsLoading: false,
+            commentsUpdating: false,
+            lastUpdate: {},
             error: action.error,
         };
     },
@@ -46,20 +54,29 @@ export const comments = createReducer(commentsInitialState, {
             byId: {
                 ...state.byId,
                 [action.id]: action.response.entities.comments[action.id]
-            }
+            },
+            commentsUpdating: false,
+            lastUpdate: {},
         };
     },
     [UPDATE_COMMENTS_REQUEST](state, action) {
-        console.log(action);
         return {
             ...state,
+            commentsUpdating: true,
+            lastUpdate: {},
         };
     },
     [UPDATE_COMMENTS_SUCCESS](state, action) {
-        console.log(action);
+        let updatedCommentId = action.id;
         return {
             ...state,
-
+            byId: {
+                ...state.byId,
+                [updatedCommentId]: action.response.entities.comments[updatedCommentId]
+            },
+            lastUpdate: {
+                [action.updateType]: updatedCommentId,
+            }
         };
     },
     [UPDATE_COMMENTS_FAILURE](state, action) {
