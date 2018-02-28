@@ -4,6 +4,7 @@ import PostComment from "./PostComment";
 import {loadComments, vote} from "../actions/comments";
 import {connect} from "react-redux";
 import {getComments} from "../selectors";
+import CommentForm from "./CommentForm";
 
 class Comments extends Component {
 
@@ -21,19 +22,24 @@ class Comments extends Component {
         }
 
         return (
-            <Comment.Group threaded>
-                <Header as='h3' dividing>Comments</Header>
-                {comments.length > 0 ? (
-                    comments.map((comment) =>
-                        <PostComment key={comment.id} comment={comment}
-                                     upVote={() => vote(comment.id, 'upVote')}
-                                     downVote={() => vote(comment.id, 'downVote')}/>)
-                ) : (
-                    <Segment>
-                        No comments yet. Feel free to start the discussion.
-                    </Segment>
-                )}
-            </Comment.Group>
+            <div>
+                <Comment.Group threaded>
+                    <Header as='h3' dividing>Comments</Header>
+                    {comments.length > 0 ? (
+                        comments.map((comment) =>
+                            <PostComment key={comment.id} comment={comment}
+                                         upVote={() => vote(comment.id, 'upVote')}
+                                         downVote={() => vote(comment.id, 'downVote')}/>)
+                    ) : (
+                        <Segment>
+                            No comments yet. Feel free to start the discussion.
+                        </Segment>
+                    )}
+                </Comment.Group>
+                <Header as='h4' dividing>Reply</Header>
+                <CommentForm/>
+            </div>
+
         )
     }
 }
