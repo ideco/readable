@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {areCommentsUpdating, getComments} from "../selectors";
 import CommentForm from "./CommentForm";
 
-class Comments extends Component {
+class CommentList extends Component {
 
     componentDidMount() {
         this.props.loadComments(this.props.postId)
@@ -68,4 +68,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments)
+export default connect(mapStateToProps, mapDispatchToProps)(CommentList)

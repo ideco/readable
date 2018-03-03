@@ -4,7 +4,7 @@ import {arePostsLoading, getDeletedPostId, makeGetPostById} from "../selectors";
 import {loadSinglePost} from "../actions/posts";
 import {Loader} from "semantic-ui-react";
 import Post from "./Post";
-import Comments from "./Comments";
+import Comments from "./CommentList";
 import {Redirect} from "react-router";
 
 class PostDetail extends Component {
