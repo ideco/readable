@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Card, Loader} from 'semantic-ui-react'
+import {Card, Loader, Segment} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {loadPosts} from '../actions/posts';
 
@@ -29,12 +30,20 @@ class PostList extends Component {
         }
 
         return (
-            <Card.Group>
-                {posts.map((post) =>
-                    <Post key={post.id}
-                          post={post}/>
+            <div>
+                {posts.length > 0 ? (
+                    <Card.Group>
+                        {posts.map((post) =>
+                            <Post key={post.id}
+                                  post={post}/>
+                        )}
+                    </Card.Group>
+                ) : (
+                    <Segment>
+                        No posts yet. Feel free to <Link to='/posts/new'>create a new post</Link>.
+                    </Segment>
                 )}
-            </Card.Group>
+            </div>
         );
     }
 }
