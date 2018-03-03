@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Comment, Header, Segment} from 'semantic-ui-react'
+import {Comment, Header, Loader, Segment} from 'semantic-ui-react'
 import PostComment from "./PostComment";
 import {addComment, deleteComment, editComment, loadComments, vote} from "../actions/comments";
 import {connect} from "react-redux";
@@ -17,7 +17,7 @@ class CommentList extends Component {
 
         if (loading) {
             return (
-                <div></div>
+                <Loader active inline='centered'/>
             )
         }
 
