@@ -27,3 +27,9 @@ export const editComment = (commentId, body) => (
         .then(ensureIsArray)
         .then(extractVoteScore('comment'))
 );
+
+export const deleteComment = (commentId) => (
+    baseFetch("DELETE")('comments', commentId)
+        .then(ensureIsArray)
+        .then(extractVoteScore('comment'))
+);

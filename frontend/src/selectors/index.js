@@ -38,7 +38,7 @@ export const makeGetPostById = () => (
 export const getComments = createSelector(
     [getCommentsById],
     (commentsById) => {
-        return _.values(commentsById)
+        return _.values(commentsById).filter((comment) => !comment.deleted)
     }
 );
 

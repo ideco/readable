@@ -78,7 +78,6 @@ export const posts = createReducer(postsInitialState, {
         }
     },
     [UPDATE_POST_FAILURE](state, action) {
-        console.log(action);
         return {
             ...state,
             error: action.error,

@@ -4,7 +4,7 @@ import Vote from "./Vote";
 import CommentEditModal from "./CommentEditModal";
 
 const PostComment = props => {
-    const {comment, upVote, downVote, edit} = props;
+    const {comment, upVote, downVote, edit, deleteComment} = props;
     return (
         <Comment>
             <Comment.Content>
@@ -28,7 +28,7 @@ const PostComment = props => {
                                     </CommentEditModal>
                                 </Comment.Action>
                                 <Comment.Action>
-                                    <Icon name='delete'/>
+                                    <Icon name='delete' onClick={deleteComment}/>
                                 </Comment.Action>
                             </Comment.Actions>
                         </Grid.Column>

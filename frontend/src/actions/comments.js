@@ -61,6 +61,22 @@ export function editComment(commentId, body) {
     }
 }
 
+export function deleteComment(commentId) {
+    return {
+        types: [
+            UPDATE_COMMENTS_REQUEST,
+            UPDATE_COMMENTS_SUCCESS,
+            UPDATE_COMMENTS_FAILURE
+        ],
+        schema: arrayOfComments,
+        callAPI: () => api.deleteComment(commentId),
+        payload: {
+            id: commentId,
+            updateType: 'DELETE'
+        }
+    }
+}
+
 export const VOTE_COMMENT_REQUEST = 'VOTE_COMMENT_REQUEST';
 export const VOTE_COMMENT_SUCCESS = 'VOTE_COMMENT_SUCCESS';
 export const VOTE_COMMENT_FAILURE = 'VOTE_COMMENT_FAILURE';
