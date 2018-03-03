@@ -74,6 +74,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-PostList.propTypes = {};
-
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

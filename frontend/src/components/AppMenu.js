@@ -60,8 +60,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-
-AppMenu.propTypes = {};
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(AppMenu);
