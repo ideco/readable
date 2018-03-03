@@ -3,9 +3,11 @@ import {Card, Loader, Segment} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {loadPosts} from '../actions/posts';
+import _ from 'lodash'
 
 import Post from "./Post";
-import {arePostsLoading, getPosts} from "../selectors";
+import {arePostsLoading, getCategories, getPosts} from "../selectors";
+import NotFound from "./NotFound";
 
 class PostList extends Component {
 
@@ -22,12 +24,21 @@ class PostList extends Component {
     }
 
     render() {
-        const {posts, loading} = this.props;
+        const {posts, loading, categories, category} = this.props;
         if (loading) {
             return (
                 <Loader active inline='centered'/>
             )
         }
+        if (category && !(_.includes(categories.map(c => c.path), category))) {
+            return (
+                <NotFound
+                    message={`Could not find category: ${category}`}
+                />
+            )
+        }
+
+
 
         return (
             <div>
@@ -51,6 +62,7 @@ class PostList extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         posts: getPosts(state),
+        categories: getCategories(state),
         loading: arePostsLoading(state),
         category: ownProps.match.params.category,
     }

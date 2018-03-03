@@ -6,6 +6,7 @@ import {Loader} from "semantic-ui-react";
 import Post from "./Post";
 import Comments from "./CommentList";
 import {Redirect} from "react-router";
+import NotFound from "./NotFound";
 
 class PostDetail extends Component {
 
@@ -32,6 +33,13 @@ class PostDetail extends Component {
         if (loading) {
             return (
                 <Loader active inline='centered'/>
+            )
+        }
+        if (!post) {
+            return (
+                <NotFound
+                    message='Post not found.'
+                />
             )
         }
 

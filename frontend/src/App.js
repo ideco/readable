@@ -8,6 +8,7 @@ import {Container} from "semantic-ui-react";
 import PostNew from "./components/PostNew";
 import PostEdit from "./components/PostEdit";
 import PostDetail from "./components/PostDetail";
+import NotFound from "./components/NotFound";
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
                         <Route exact path="/:category?" component={PostList}/>
                         <Route exact path="/:category/:postId" component={PostDetail}/>
                         <Route exact path="/:category/:postId/edit" component={PostEdit}/>
+                        <Route component={NotFound}/>
                     </Switch>
                 </Container>
                 <Footer/>
