@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Comment, Header, Segment} from 'semantic-ui-react'
 import PostComment from "./PostComment";
-import {addComment, loadComments, vote} from "../actions/comments";
+import {addComment, editComment, loadComments, vote} from "../actions/comments";
 import {connect} from "react-redux";
 import {areCommentsUpdating, getComments} from "../selectors";
 import CommentForm from "./CommentForm";
@@ -13,7 +13,7 @@ class Comments extends Component {
     }
 
     render() {
-        const {comments, loading, vote, postId, addComment, updating} = this.props;
+        const {comments, loading, vote, postId, addComment, editComment, updating} = this.props;
 
         if (loading) {
             return (
@@ -28,6 +28,7 @@ class Comments extends Component {
                     {comments.length > 0 ? (
                         comments.map((comment) =>
                             <PostComment key={comment.id} comment={comment}
+                                         edit={(body) => editComment(comment.id, body)}
                                          upVote={() => vote(comment.id, 'upVote')}
                                          downVote={() => vote(comment.id, 'downVote')}/>)
                     ) : (
@@ -60,6 +61,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadComments: (postId) => dispatch(loadComments(postId)),
         addComment: (postId, data) => dispatch(addComment(postId, data)),
+        editComment: (commentId, body) => dispatch(editComment(commentId, body)),
         vote: (commentId, option) => dispatch(vote(commentId, option))
     }
 };

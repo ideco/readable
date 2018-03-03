@@ -4,7 +4,7 @@ import Vote from "./Vote";
 import CommentEditModal from "./CommentEditModal";
 
 const PostComment = props => {
-    const {comment, upVote, downVote} = props;
+    const {comment, upVote, downVote, edit} = props;
     return (
         <Comment>
             <Comment.Content>
@@ -21,7 +21,9 @@ const PostComment = props => {
                             <Comment.Text> {comment.body} </Comment.Text>
                             <Comment.Actions>
                                 <Comment.Action>
-                                    <CommentEditModal comment={comment}>
+                                    <CommentEditModal
+                                        comment={comment}
+                                        edit={edit}>
                                         <Icon name='edit'/>
                                     </CommentEditModal>
                                 </Comment.Action>

@@ -18,3 +18,12 @@ export const addComment = (postId, data) => (
         .then(ensureIsArray)
         .then(extractVoteScore('comment'))
 );
+
+export const editComment = (commentId, body) => (
+    baseFetch('PUT', JSON.stringify({
+            body
+        })
+    )('comments', commentId)
+        .then(ensureIsArray)
+        .then(extractVoteScore('comment'))
+);
