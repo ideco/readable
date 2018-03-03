@@ -1,6 +1,7 @@
 import React from 'react'
 import {Comment, Grid, Icon} from 'semantic-ui-react'
 import Vote from "./Vote";
+import CommentEditModal from "./CommentEditModal";
 
 const PostComment = props => {
     const {comment, upVote, downVote} = props;
@@ -20,7 +21,9 @@ const PostComment = props => {
                             <Comment.Text> {comment.body} </Comment.Text>
                             <Comment.Actions>
                                 <Comment.Action>
-                                    <Icon link name='edit'/>
+                                    <CommentEditModal comment={comment}>
+                                        <Icon name='edit'/>
+                                    </CommentEditModal>
                                 </Comment.Action>
                                 <Comment.Action>
                                     <Icon name='delete'/>
