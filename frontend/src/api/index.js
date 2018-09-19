@@ -9,7 +9,7 @@ const headers = {
     'Content-Type': 'application/json'
 };
 
-export const baseFetch = (method = 'GET', body = {}) => (
+export const baseFetch = (method = 'GET', body = undefined) => (
     (...path) => {
         return fetch(createUrl(BASE_URL, ...path),
             {
